@@ -1,0 +1,51 @@
+---
+title: "农村老兵的出海独立站第一周复盘"
+date: "2026-06-28"
+category: "build-in-public"
+tags: ["出海", "独立开发", "复盘"]
+description: "辞职回村第一周，我用 Next.js 和 Tailwind 搭了个个人网站，成本不到100块，踩了几个坑，也收获了一些 insight。"
+---
+
+# 农村老兵的出海独立站第一周复盘
+
+## 为什么开始
+
+2026 年 6 月，我正式辞职回到农村，开始全职独立开发。做了 10 年 Java 全栈，待过大厂，也接过外包，但始终觉得应该做点自己的东西。
+
+## 这周做了什么
+
+### 1. 搭建个人网站
+
+用 **Next.js 14 + Tailwind CSS** 搭了这个个人网站，部署在 **Cloudflare Pages** 上。整个流程花了大约 3 天，主要是设计和内容填充比较耗时。
+
+```javascript
+// next.config.mjs 关键配置
+const nextConfig = {
+  images: {
+    unoptimized: true,
+  },
+};
+```
+
+### 2. 选型理由
+
+- **Next.js**: SSG 模式对 SEO 友好，个人博客首选
+- **Tailwind**: 写样式快，不用切来切去
+- **Cloudflare Pages**: 免费，全球 CDN，自动部署
+
+## 踩过的坑
+
+1. **`@cloudflare/next-on-pages` 版本兼容**：最新版要求 Next.js `>=14.3.0`，但 14.x 最新只有 14.2.x。最后锁定了 1.13.15 版本。
+2. **中文排版**：默认的 Tailwind 对中文排版不太友好，需要手动调整 `line-height` 和字体栈。
+3. **静态生成**：所有 `fs` 操作必须在 `generateStaticParams` 或构建时的 `getStaticProps` 等效逻辑中完成。
+
+## 下周计划
+
+- [ ] 写 3 篇技术文章
+- [ ] 配置 Google Analytics
+- [ ] 开始第一笔接单推广
+- [ ] 研究海外支付 Stripe 接入
+
+---
+
+> 如果你也在做出海独立开发，欢迎联系交流。

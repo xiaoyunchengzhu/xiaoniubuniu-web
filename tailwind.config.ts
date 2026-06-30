@@ -9,8 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          orange: "#F59E0B",
+          "orange-dark": "#D97706",
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '720px',
+            lineHeight: '1.8',
+          },
+        },
       },
     },
   },
