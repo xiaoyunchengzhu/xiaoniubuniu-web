@@ -5,7 +5,7 @@ category: "deploy"
 tags: ["VPS", "高性价比", "按小时计费"]
 description: "我用过 Linode、DigitalOcean、Hetzner，最终日常主力还是 Vultr。按小时计费、机房多、支持支付宝，出海开发者的最佳选择。"
 link: "https://www.vultr.com/?ref=placeholder"
-affiliate: true
+affiliate: false
 ---
 
 # Vultr — 独立开发者出海第一台服务器

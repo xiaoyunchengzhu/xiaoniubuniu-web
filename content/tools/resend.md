@@ -5,7 +5,7 @@ category: "email"
 tags: ["邮件", "API", "React"]
 description: "开发者友好的邮件发送服务，API 简洁，支持 React Email 组件。"
 link: "https://resend.com/?ref=placeholder"
-affiliate: true
+affiliate: false
 ---
 
 # Resend

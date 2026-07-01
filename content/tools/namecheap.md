@@ -4,8 +4,8 @@ date: "2026-05-28"
 category: "domain"
 tags: ["域名", "高性价比"]
 description: "域名注册首选，价格透明，送 Whois 隐私保护。"
-link: "https://www.namecheap.com/?ref=placeholder"
-affiliate: true
+link: "https://www.namecheap.com"
+affiliate: false
 ---
 
 # Namecheap

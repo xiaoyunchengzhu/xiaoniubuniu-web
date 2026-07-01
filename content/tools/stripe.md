@@ -5,7 +5,7 @@ category: "payment"
 tags: ["支付", "API", "订阅"]
 description: "海外支付首选，API 文档优秀，支持多种支付方式和订阅管理。"
 link: "https://stripe.com/?ref=placeholder"
-affiliate: true
+affiliate: false
 ---
 
 # Stripe

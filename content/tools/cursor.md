@@ -4,8 +4,8 @@ date: "2026-06-05"
 category: "dev-tool"
 tags: ["AI", "编辑器", "效率"]
 description: "从 VS Code + Copilot 切换到 Cursor，3个月的真实使用体验。有些任务快了一倍，有些场景反而更慢。"
-link: "https://cursor.sh/?ref=placeholder"
-affiliate: true
+link: "https://cursor.sh/"
+affiliate: false
 ---
 
 # Cursor 三个月使用体验

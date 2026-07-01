@@ -4,7 +4,7 @@ date: "2026-06-01"
 category: "domain"
 tags: ["CDN", "DNS", "免费", "安全"]
 description: "免费 CDN + DNS + DDoS 防护，个人项目首选。"
-link: "https://www.cloudflare.com/?ref=placeholder"
+link: "https://www.cloudflare.com/"
 affiliate: false
 ---
 
