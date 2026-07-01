@@ -57,8 +57,36 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   const categoryLabel = categoryLabels[post.category] || post.category;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: "小牛不牛",
+      url: "https://www.xiaoniubuniu.com/about",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "小牛不牛",
+    },
+    url: `https://www.xiaoniubuniu.com/blog/${post.slug}`,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.xiaoniubuniu.com/blog/${post.slug}`,
+    },
+  };
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* JSON-LD 结构化数据 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* 文章头部 */}
       <article className="max-w-[720px] mx-auto">
         <div className="mb-8">
