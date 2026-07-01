@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 import { getAllProducts } from "@/lib/products";
 import BlogCard from "@/components/BlogCard";
 import ProductCard from "@/components/ProductCard";
+
+export const metadata: Metadata = {
+  other: {
+    "impact-site-verification": "34e7f3ce-0240-4c90-b791-c114de436cb3",
+  },
+};
 
 export default function HomePage() {
   const latestPosts = getAllPosts().slice(0, 3);

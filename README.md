@@ -81,7 +81,7 @@ description: "文章摘要，用于列表页和 SEO"
 git init
 git add .
 git commit -m "Initial commit"
-git remote add origin git@github.com:<your-username>/xiaoniubuniu-web.git
+git remote add origin git@github.com:xiaoyunchengzhu/xiaoniubuniu-web.git
 git push -u origin main
 ```
 
@@ -95,21 +95,28 @@ git push -u origin main
    |---|---|
    | **构建命令** | `npx @cloudflare/next-on-pages` |
    | **输出目录** | `.vercel/output/static` |
-
+   |**设置/运行时/兼容性标志**| nodejs_compat|
 4. **部署**
 
    点击「保存并部署」，Cloudflare 会自动构建并发布。
-
-5. **绑定自定义域名**
-
-   在项目设置 → **自定义域** 中添加 `xiaoniubuniu.com`（以及 `www.xiaoniubuniu.com`）。
+5. Namecheap 申请域名和DNS解析
+- 登录 Namecheap → **Domain List** → 你的域名 → **“Advanced DNS”** 标签
+- 点击 **“ADD NEW RECORD”**：
+  - **CNAME 记录**：
+    - Type: `CNAME Record`
+    - Host: 比如 `www`
+    - Value: `你的项目名.pages.dev`（Cloudflare 提示的那串）
+    - TTL: 自动
+- 保存
+6. **绑定自定义域名**
+   在项目设置 → **自定义域** 中添加 `www.xiaoniubuniu.com`。
    按照 Cloudflare 提示修改 DNS 记录（通常是 CNAME 到 Cloudflare Pages 提供的地址）。
 
-6. **SSL 证书**
+7. **SSL 证书**
 
    Cloudflare 会自动签发 SSL 证书，无需额外操作。
 
-7. **持续部署**
+8. **持续部署**
 
    之后每次 `git push` 到 main 分支，Cloudflare 会**自动触发构建和部署**。
 

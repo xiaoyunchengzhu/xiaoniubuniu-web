@@ -66,13 +66,7 @@ const partnerServices = [
     title: "出海工具 / 小游戏合伙",
     description:
       "快速验证市场需求，用最小成本开发 MVP，一起跑出海赛道。",
-  },
-  {
-    emoji: "🤝",
-    title: "技术合伙人方式",
-    description:
-      "如果你已在创业但缺 CTO，我们可以深度绑定，我全力负责产品研发。",
-  },
+  }
 ];
 
 export default function ServicesPage() {

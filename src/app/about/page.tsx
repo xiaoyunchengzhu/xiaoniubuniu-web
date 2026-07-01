@@ -143,9 +143,12 @@ export default function AboutPage() {
             <ul className="text-gray-600 space-y-2">
               <li>
                 📧 邮箱：{" "}
-                <code className="bg-gray-100 px-2 py-0.5 rounded text-sm">
+                <a
+                  href="mailto:xiaoyunchengzhu@gmail.com"
+                  className="text-brand-orange hover:underline"
+                >
                   xiaoyunchengzhu@gmail.com
-                </code>
+                </a>
               </li>
               <li>
                 💬 微信：{" "}
