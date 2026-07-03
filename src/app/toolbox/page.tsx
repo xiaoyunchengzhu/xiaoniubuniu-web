@@ -33,7 +33,7 @@ export default function ToolboxPage() {
       <div className="mt-12 text-center text-sm text-gray-400">
         <p>
           工具列表会持续更新。如果你有好的工具推荐，欢迎{" "}
-          <a href="/contact" className="text-brand-orange hover:underline">
+          <a href="/about" className="text-brand-orange hover:underline">
             告诉我
           </a>
           。

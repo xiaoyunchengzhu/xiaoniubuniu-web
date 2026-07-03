@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "关于这头牛",
@@ -157,14 +156,6 @@ export default function AboutPage() {
                 </code>
               </li>
             </ul>
-            <div className="mt-4">
-              <Link
-                href="/contact"
-                className="inline-block text-sm px-5 py-2.5 rounded-lg bg-brand-orange text-white font-medium hover:bg-brand-orange-dark transition-colors"
-              >
-                直接联系我 →
-              </Link>
-            </div>
           </section>
         </div>
       </div>

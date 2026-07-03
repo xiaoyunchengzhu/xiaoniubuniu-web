@@ -133,7 +133,7 @@ export default function ServicesPage() {
           不想看这么多？直接告诉我你的需求，我能搞定就接，搞不定帮你指条路。
         </p>
         <Link
-          href="/contact"
+          href="/about"
           className="inline-block text-lg px-8 py-3 rounded-xl bg-brand-orange text-white font-semibold hover:bg-brand-orange-dark transition-colors shadow-lg shadow-orange-200"
         >
           📮 把需求砸过来

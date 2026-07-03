@@ -212,7 +212,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             想聊出海或合作？把你的需求砸过来 →
           </p>
           <Link
-            href="/contact"
+            href="/about"
             className="inline-block px-6 py-2.5 rounded-lg bg-brand-orange text-white font-medium hover:bg-brand-orange-dark transition-colors"
           >
             联系我

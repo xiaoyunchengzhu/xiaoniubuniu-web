@@ -126,7 +126,7 @@ git push -u origin main
 
 ### 替换个人信息
 
-以下文件包含 `placeholder` 占位内容，发布前需要替换：
+以下文件包含个人信息的内容，发布前需要替换：
 
 | 文件 | 需要替换的内容 |
 |---|---|
@@ -135,10 +135,6 @@ git push -u origin main
 | `src/components/Footer.tsx` | GitHub、Twitter、知乎链接 |
 | `data/tools.ts` | 工具推荐链接（替换为你的 affiliate 链接） |
 
-### 替换联系表单
-
-`src/app/contact/page.tsx` 中的表单目前 `action` 指向 Formspree 占位地址。
-推荐使用 [Formspree](https://formspree.io/) 或 [Web3Forms](https://web3forms.com/) 接入表单功能。
 
 ## License
 

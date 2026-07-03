@@ -151,7 +151,7 @@ export default function HomePage() {
             目前在接出海建站 / 技术咨询的活儿，欢迎老板来撩 👇
           </p>
           <Link
-            href="/contact"
+            href="/about"
             className="inline-block text-lg px-8 py-3 rounded-xl bg-brand-orange text-white font-semibold hover:bg-brand-orange-dark transition-colors shadow-lg shadow-orange-200"
           >
             联系我

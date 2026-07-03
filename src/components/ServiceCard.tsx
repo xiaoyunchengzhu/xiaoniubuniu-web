@@ -13,7 +13,7 @@ export default function ServiceCard({
   title,
   description,
   buttonText = "聊聊合作",
-  buttonHref = "/contact",
+  buttonHref = "/about",
 }: ServiceCardProps) {
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">

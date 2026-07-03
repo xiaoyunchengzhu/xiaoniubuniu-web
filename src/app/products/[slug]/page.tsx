@@ -210,7 +210,7 @@ export default function ProductDetailPage({
             有合作想法或想聊聊产品？
           </p>
           <Link
-            href="/contact"
+            href="/about"
             className="inline-block px-6 py-2.5 rounded-lg bg-brand-orange text-white font-medium hover:bg-brand-orange-dark transition-colors"
           >
             联系我

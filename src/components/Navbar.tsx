@@ -12,7 +12,6 @@ const navLinks = [
   { href: "/toolbox", label: "工具箱" },
   { href: "/services", label: "服务" },
   { href: "/about", label: "关于" },
-  { href: "/contact", label: "联系" },
 ];
 
 export default function Navbar() {
