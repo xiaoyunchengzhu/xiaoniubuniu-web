@@ -1,92 +1,100 @@
 ---
-title: "PurePaste：一键净化剪贴板的 macOS 菜单栏小工具"
-date: "2026-07-03"
-status: "in-development"
+title: "PurePaste：开源 macOS 智能剪贴板工具，不只是净化格式，更是理解复制意图"
+date: "2026-07-09"
+status: "released"
 category: "macOS"
-tags: ["macOS", "SwiftUI", "剪贴板", "效率工具", "MenuBar", "纯文本", "Markdown"]
-description: "自动监听剪贴板，将复制内容即时转换为纯文本或智能 Markdown，解决「粘贴带格式」的痛点。SwiftUI + MenuBarExtra 原生实现，零依赖，所有处理均在本地完成。"
+tags: ["macOS", "SwiftUI", "剪贴板", "效率工具", "MenuBar", "开源", "PasteFlow", "意图识别", "剪贴板历史"]
+description: "PurePaste 是一款开源的 macOS 菜单栏剪贴板工具。纯文本自动净化 + PasteFlow 智能识别 11 种内容类型（URL/邮箱/颜色/数学/经纬度等）+ 意图历史回溯。SwiftUI 原生开发，本地处理，零隐私风险。免费开源。"
+keywords: ["macOS剪贴板工具", "PurePaste", "剪贴板增强", "纯文本粘贴", "Mac效率工具", "开源剪贴板", "SwiftUI剪贴板"]
 ---
 
-## 痛点：你多久被「粘贴带格式」折磨一次？
+## 痛点：复制粘贴这件事，多少年了还是这么难用
 
 从网页复制一段文字，粘贴到飞书 / Notion / 微信 / 邮件——字体变了、颜色带了、链接嵌了、行间距崩了。
 
-我每天至少遇到十次。Cmd+Shift+V（无格式粘贴）是个半吊子方案：有些 App 不支持，有些快捷键冲突，而且它不会帮你清理多余空白、也不会把网页链接转成干净的 Markdown。
+Cmd+Shift+V 是个半吊子方案：有些 App 不支持，有些快捷键冲突，而且它不会帮你识别你复制的是 URL 还是邮箱还是颜色值。
 
-于是写了 [PurePaste](*)。
+**PurePaste 要解决的就是「复制之后做什么」的问题。**
 
-## 它做什么
+## PurePaste 是什么？
 
-PurePaste 是一个 macOS 菜单栏应用，打开后常驻菜单栏。核心功能就一句话：**监听剪贴板，把复制的内容自动纯化，再写回去**。你正常 Cmd+C，然后随便 Cmd+V 到任何地方，粘贴出来的都是干净格式。
+**PurePaste** 是一款开源的 macOS 菜单栏应用，常驻屏幕右上角，自动监听剪贴板。它有两个核心模式：
 
-两种工作模式：
+- **纯文本模式**：自动剥离富文本格式，清理多余空白和 CJK 空格
+- **PasteFlow 模式**：识别复制内容的类型，在鼠标旁弹出操作面板，一键直达
 
-| 模式 | 做什么 |
-|------|--------|
-| **纯文本模式** | 剥离全部富文本（RTF/HTML），清理多余换行和空白，智能移除 CJK 字符间不必要的空格，保留英文词间空格 |
-| **智能 Markdown 模式** | 在纯文本基础上，把网页链接转成 `[text](url)`，加粗转 `**text**`，斜体转 `*text*`，列表转 `- item` |
+所有处理在本地完成，数据永不上传。
 
-一键切换，菜单栏图标颜色会随之变化（灰/蓝/紫），一眼就知道当前状态。
+## PasteFlow：你的剪贴板会思考了
 
-## 技术选型
+这是 PurePaste 区别于所有同类工具的核心功能。复制内容后，PasteFlow 自动检测它是什么，然后弹出对应操作：
 
-用到的都是原生框架，没有第三方依赖：
+| 类型 | 示例 | 自动弹出 |
+|------|------|----------|
+| 🔗 链接 | `https://github.com/xiaoyunchengzhu/PurePaste` | 浏览器打开 |
+| 📧 邮箱 | `xiaoyunchengzhu@gmail.com` | 写邮件 |
+| 📱 电话 | `13812345678` | 拨打电话 |
+| 📍 地址 | `北京市海淀区中关村南大街5号` | 地图查看 |
+| 🎨 颜色 | `#FF5733` | 面板内大色块预览 + 复制 HEX / RGB |
+| 🧮 数学 | `(35+47)*1.2` | 自动计算结果并复制 |
+| 🌍 经纬度 | `39.9042, 116.4074` | 地图定位 |
+| 📅 日期 | `2024-01-15 14:00` | 添加到日历 |
+| 📡 IP | `192.168.1.1` | Ping |
+| 📦 快递 | `SF123456789012` | 查快递 |
+| 📄 富文本 | 网页复制带格式 | 转为 Markdown / 纯文本 |
 
-- **SwiftUI** — 整个应用入口是 `MenuBarExtra`，不需要 Dock 图标，不需要 NSWindow
-- **NSPasteboard** — 读取系统剪贴板，基于 `changeCount` 轮询检测新复制
-- **SMAppService** — 实现「开机启动」
-- **@AppStorage** — 偏好持久化 + 试用计数
+**单按钮面板按 Enter 直接触发，无需点鼠标。** 这是反复打磨后的体验细节——识别到 URL，Enter 打开浏览器，一气呵成。
 
-项目非常轻量，四个源文件加起来不到 600 行。
+## 意图历史：不只是「复制过什么」，更是「用剪贴板完成了什么」
 
-## 核心设计：怎么避免死循环
+市面上所有剪贴板历史工具（Maccy、Paste、CopyClip）都只记录「复制了什么内容」。PurePaste 的意图历史记录的是：
 
-剪贴板工具最典型的坑是「写回剪贴板 → 触发自身监听 → 再读 → 再写」的死循环。
+- 🟢 **意图已完成**：复制 URL → 打开了浏览器
+- 🟠 **已识别但未操作**：复制了颜色 → 没做任何操作
+- ⚪ **普通复制**：纯文本模式下的净化记录
 
-PurePaste 用了双重防护：
+每条记录带时间、类型、操作、模式四个标签。支持按类型（只看 URL / 只看颜色）、模式（只看 PasteFlow）、关键词实时筛选。数据存储在本地 JSON 文件，最大 5000 条。
+
+## 技术架构：纯原生，零依赖
 
 ```swift
-// 防护 1：写入前设标志位，顶部 guard 直接跳过
-guard !internalWriteFlag else { return }
-
-// ... 纯化处理 ...
-
-// 防护 2：写回后立即更新 changeCount，
-// 下一次轮询发现 changeCount 相等 → 跳过
-internalWriteFlag = true
-pasteboard.clearContents()
-pasteboard.setString(processed, forType: .string)
-lastChangeCount = pasteboard.changeCount
-internalWriteFlag = false
+SwiftUI + AppKit + MenuBarExtra + NSPasteboard + Combine
 ```
 
-同时，非文本内容（图片、文件、PDF）直接跳过，不做任何修改。
+- **剪贴板监听**：基于 `NSPasteboard.changeCount` 轮询，`internalWriteFlag` + `lastChangeCount` 双重防死循环
+- **数学计算器**：手写递归下降解析器，支持 `+ - * / % ^ ()` 及一元负号
+- **浮动面板**：`NSWindow.borderless` + `.nonactivatingPanel`，鼠标旁弹出不抢焦点
+- **历史存储**：纯 JSON 文件，内存常驻过滤，无数据库依赖
+- **双语支持**：手动切换中文 / English，未设置时自动跟随系统
 
-## 试用与变现
+项目完整开源，全部 12 个 Swift 源文件，结构清晰，注释完备。
 
-内置了轻量试用系统：
+## 安装方式
 
-- 前 7 次启动全功能免费（`@AppStorage("launchCount")` 计数）
-- 超过 7 次后，智能 Markdown 模式锁定，菜单显示「请购买以解锁」
-- 点击「购买激活」跳转占位 URL，可接入自己的支付页
-- Debug 模式下提供「模拟激活」按钮，方便开发测试
+**方式一：源码编译（推荐，完全免费）**
 
-真实支付还没接——目前是功能验证阶段，如果你有兴趣试用，欢迎提 issue。
+```bash
+git clone https://github.com/xiaoyunchengzhu/PurePaste.git
+cd PurePaste
+open PurePaste.xcodeproj
+# Cmd+R 运行
+```
 
-## 隐私声明
+**方式二：下载已构建版本（DMG 安装包）**
 
-菜单里的「关于」弹窗明确写了：
+👉 [**下载 PurePaste 2.0 DMG**](/downloads/PurePaste_2.0.dmg)（667 KB，macOS 14+）
 
-> 所有处理均在本地完成，数据永不上传。
+下载后双击打开，拖到 `/Applications` 即可。首次打开如提示「无法验证开发者」，右键 → 打开 → 仍要打开。
 
-没有后端，没有统计 SDK，没有埋点。剪贴板内容从来不会离开你的电脑。
+## 隐私承诺
 
-## 小结
+没有后端，没有统计 SDK，没有埋点。剪贴板内容、历史记录、识别结果——所有数据从生成到存储再到处理，全程不离开你的 Mac。源码公开可审计。
 
-写这个工具花了一个下午，但解决的是一个每天都遇到的痛点。如果你也是「Cmd+C → Cmd+Shift+V」肌肉记忆持有者，试试看，也许能让你少按一个键。
+## 链接
 
-项目地址暂未公开，感兴趣的朋友可以留言或私信交流。
+- GitHub：[github.com/xiaoyunchengzhu/PurePaste](https://github.com/xiaoyunchengzhu/PurePaste)
+- 产品页 & 下载：[xiaoniubuniu.com/products/pure-paste](https://www.xiaoniubuniu.com/products/pure-paste/)
 
 ---
 
-*更新于 2026-07-03 · 项目状态：开发中*
+*本工具开源免费。如果你觉得有用，欢迎给个 Star ⭐*
