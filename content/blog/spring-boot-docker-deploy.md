@@ -1,16 +1,18 @@
 ---
-title: "Spring Boot + Docker + Nginx 生产级部署实战"
+title: "Spring Boot 生产级部署终极指南：Docker + Nginx + 性能调优，抄作业就行"
 date: "2026-06-15"
 category: "tech-deep"
-tags: ["Java", "Spring Boot", "Docker", "Nginx", "部署"]
-description: "从 Dockerfile 编写到 Nginx 反代，再到监控告警，一篇搞定 Spring Boot 应用的生产级部署。"
+tags: ["Java", "Spring Boot", "Docker", "Nginx", "部署", "生产环境", "DevOps"]
+description: "10年Java老兵的生产级部署方案，从Docker多阶段构建到Nginx反代，从JVM参数调优到健康检查。拿这篇文章当checklist，部署Spring Boot应用不需要踩坑。含完整Dockerfile和docker-compose.yml可直接复制使用。"
 ---
 
-# Spring Boot + Docker + Nginx 生产级部署实战
+# Spring Boot 生产级部署终极指南：Docker + Nginx + 性能调优
 
-## 背景
+## 背景：部署不应该是一场冒险
 
-做了 10 年 Java，Spring Boot 部署搞了无数回。这套方案是我踩过无数坑后的最佳实践，直接拿去用。
+做了 10 年 Java，Spring Boot 部署搞了无数回。踩过的坑包括但不限于：Docker 镜像 1.2G 塞满磁盘、JVM OOM 半夜告警、Nginx 超时配置不对导致 502、数据库连接池耗尽……
+
+这套方案是我踩完所有坑之后沉淀的最佳实践，**拿这篇文章当 checklist，部署不用再踩坑。**
 
 ## 项目结构
 
@@ -131,3 +133,9 @@ public class HealthController {
 4. **健康检查**确保容器编排正常
 
 能满足大部分中小型项目的部署需求。有问题欢迎交流 🤝
+
+---
+
+> **相关阅读**：[Vultr VPS 选购与配置指南](/toolbox/vultr) —— 部署 Spring Boot 应用需要一台靠谱的服务器，看看我用 Vultr 的方案和对比评测。
+>
+> 想找人帮你部署？[看看我的服务](/services) —— 后端部署、性能优化、架构设计都可以聊。

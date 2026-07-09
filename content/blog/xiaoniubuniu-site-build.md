@@ -1,9 +1,9 @@
 ---
-title: "我用 Claude Code + Next.js 搭了个个人网站，从想法到上线只用了半天"
+title: "2026年个人网站搭建终极方案：Claude Code + Next.js + Cloudflare Pages，半天上线，年成本$13"
 date: "2026-07-01"
 category: "build-in-public"
-tags: ["Claude Code", "Next.js", "建站", "Cloudflare", "独立开发"]
-description: "不用 WordPress，不用第三方 CMS，纯靠 Claude Code 对话式开发，半天搭完一个完整的个人网站。记录完整选型思路和踩坑经验。"
+tags: ["Claude Code", "Next.js", "个人网站搭建", "Cloudflare Pages", "独立开发", "建站教程", "SEO"]
+description: "不用WordPress、不用CMS、不用服务器。我用Claude Code对话式开发，半天搭完7页面完整网站：博客、产品、工具箱、服务。从域名注册到Cloudflare Pages部署，从Markdown内容管理到SEO全配置，完整流程和全部踩坑记录。源码公开。"
 ---
 
 # 我用 Claude Code + Next.js 搭了个个人网站，从想法到上线只用了半天
@@ -207,4 +207,6 @@ Cloudflare Pages 期望所有页面都是纯静态的。用 `searchParams` 会�
 
 ---
 
-> 如果你也想搭一个类似的站，或者对这套方案有疑问，[直接联系我](/contact)。我自己就在做建站服务，帮你从 0 到 1 搞定。
+> **相关阅读**：[独立开发者找不到产品方向？我用大模型建了个需求挖掘系统](/blog/require-dis) —— 同一个 Claude Code 工具，用来找产品方向和用来搭网站，思路完全不同。
+>
+> 如果你也想搭一个类似的站，或者对这套方案有疑问，[看看我的建站服务](/services) 或 [直接联系我](mailto:xiaoyunchengzhu@gmail.com)。帮你从 0 到 1 搞定。

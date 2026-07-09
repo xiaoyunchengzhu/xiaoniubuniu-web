@@ -56,4 +56,4 @@ link: "http://43.143.68.104:81/"
 
 ---
 
-> 感兴趣的话，[联系我](/contact) 聊聊你的场景。
+> 感兴趣的话，[联系我](mailto:xiaoyunchengzhu@gmail.com) 聊聊你的场景。
