@@ -21,6 +21,7 @@ const categoryOptions = [
   { key: "iot", label: "物联网" },
   { key: "saas", label: "SaaS" },
   { key: "mobile", label: "移动端" },
+  { key: "macOS", label: "macOS" },
   { key: "tool", label: "工具" },
   { key: "other", label: "其他" },
 ];
