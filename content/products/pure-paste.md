@@ -45,11 +45,11 @@ Cmd+Shift+V 是个半吊子方案：有些 App 不支持，有些快捷键冲突
 
 **单按钮面板按 Enter 直接触发，无需点鼠标。**
 
-![PasteFlow 演示](https://www.xiaoniubuniu.com/images/purepaste/demo.gif)
+![PasteFlow 演示](https://www.xiaoniubuniu.com/images/products/purepaste/demo.gif)
 
-![URL 检测](https://www.xiaoniubuniu.com/images/purepaste/url-detect.png)
-![颜色预览](https://www.xiaoniubuniu.com/images/purepaste/color-detect.png)
-![数学计算](https://www.xiaoniubuniu.com/images/purepaste/math-detect.png)
+![URL 检测](https://www.xiaoniubuniu.com/images/products/purepaste/url-detect.png)
+![颜色预览](https://www.xiaoniubuniu.com/images/products/purepaste/color-detect.png)
+![数学计算](https://www.xiaoniubuniu.com/images/products/purepaste/math-detect.png)
 
 ## 意图历史：不只是「复制过什么」，更是「用剪贴板完成了什么」
 
@@ -61,7 +61,7 @@ Cmd+Shift+V 是个半吊子方案：有些 App 不支持，有些快捷键冲突
 
 每条记录带时间、类型、操作、模式四个标签。支持按类型（只看 URL / 只看颜色）、模式（只看 PasteFlow）、关键词实时筛选。数据存储在本地 JSON 文件，最大 5000 条。
 
-![意图历史](https://www.xiaoniubuniu.com/images/purepaste/history.png)
+![意图历史](https://www.xiaoniubuniu.com/images/products/purepaste/history.png)
 
 ## 技术架构：纯原生，零依赖
 

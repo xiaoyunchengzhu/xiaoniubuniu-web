@@ -27,7 +27,7 @@ export default function AboutPage() {
     "@type": "Person",
     name: "小牛不牛",
     url: "https://www.xiaoniubuniu.com/about",
-    image: "https://www.xiaoniubuniu.com/images/photo-work.jpg",
+    image: "https://www.xiaoniubuniu.com/images/common/photo-work.jpg",
     jobTitle: "全栈独立开发者",
     description:
       "10年全栈开发经验，擅长Java/Spring Boot、Android、Python、AI应用、嵌入式开发。远程接单，提供MVP开发、后端系统、AI自动化服务。",
@@ -76,7 +76,7 @@ export default function AboutPage() {
             <div className="rounded-2xl overflow-hidden border border-gray-200">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/photo-work.jpg"
+                src="/images/common/photo-work.jpg"
                 alt="小牛不牛 — 全栈独立开发者工作场景"
                 className="w-full h-48 md:h-56 object-cover"
               />
@@ -88,13 +88,13 @@ export default function AboutPage() {
             <div className="w-40 h-40 mx-auto bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/qrcode-wechat.jpg"
+                src="/images/common/qrcode-wechat.jpg"
                 alt="公众号「小牛不牛」二维码"
                 className="w-full h-full object-contain"
               />
             </div>
             <p className="text-xs text-gray-400 mt-2">
-              （将二维码图片保存为 public/images/qrcode-wechat.jpg）
+              （将二维码图片保存为 public/images/common/qrcode-wechat.jpg）
             </p>
             <p className="text-xs text-gray-500">
               扫码关注公众号{" "}
