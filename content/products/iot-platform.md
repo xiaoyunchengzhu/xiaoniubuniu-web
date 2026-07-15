@@ -3,6 +3,7 @@ title: "小牛物联网平台 (NB-IoT Platform)"
 date: "2026-05-15"
 status: "active"
 category: "iot"
+platforms: ["web"]
 tags: ["物联网", "ESP32", "Spring Boot", "MQTT", "时序数据库"]
 description: "一套面向中小企业的物联网设备管理平台，支持设备接入、数据采集、规则引擎和可视化大屏。"
 link: "http://43.143.68.104:81/"

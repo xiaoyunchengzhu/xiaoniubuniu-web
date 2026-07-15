@@ -6,12 +6,17 @@ export interface Product {
   slug: string;
   title: string;
   date: string;
-  status: "active" | "in-development" | "archived";
+  status: "active" | "in-development" | "archived" | "released";
   category: string;
   tags: string[];
   description: string;
   link?: string;
   image?: string;
+  icon?: string;
+  platforms?: string[];
+  screenshots?: string[];
+  download_link?: string;
+  github_url?: string;
   content: string;
 }
 
@@ -46,6 +51,11 @@ export function getAllProducts(): Product[] {
         description: data.description || "",
         link: data.link || undefined,
         image: data.image || undefined,
+        icon: data.icon || undefined,
+        platforms: data.platforms || undefined,
+        screenshots: data.screenshots || undefined,
+        download_link: data.download_link || undefined,
+        github_url: data.github_url || undefined,
         content,
       };
     });
@@ -76,6 +86,11 @@ export function getProductBySlug(slug: string): Product | null {
     description: data.description || "",
     link: data.link || undefined,
     image: data.image || undefined,
+    icon: data.icon || undefined,
+    platforms: data.platforms || undefined,
+    screenshots: data.screenshots || undefined,
+    download_link: data.download_link || undefined,
+    github_url: data.github_url || undefined,
     content,
   };
 }

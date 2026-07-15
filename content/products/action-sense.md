@@ -1,11 +1,18 @@
 ---
-title: "ActionSense — Smart Clipboard Manager for macOS"
+title: "ActionSense"
 date: "2026-07-15"
 status: "released"
 category: "macOS"
-tags: ["macOS", "SwiftUI", "clipboard", "productivity", "MenuBar", "open source", "PasteFlow", "ActionSense"]
-description: "ActionSense is an open-source macOS menu bar clipboard assistant. Auto plain-text cleaning + PasteFlow smart detection of 9 content types (URL/email/color/math/geo/JSON) + intent-based history. 5 languages, fully local, zero privacy risk. Free & open source."
-keywords: ["macOS clipboard manager", "ActionSense", "clipboard enhancer", "Mac productivity tool", "open source clipboard", "SwiftUI clipboard"]
+icon: "/images/products/purepaste/icon_256.png"
+platforms: ["macOS"]
+tags: ["macOS", "SwiftUI", "clipboard", "productivity", "open source"]
+description: "A smart clipboard assistant for macOS. Auto plain-text cleaning + PasteFlow detection of URLs, emails, colors, math, and more. Native, local, open source."
+link: "https://github.com/xiaoyunchengzhu/ActionSense"
+download_link: "/downloads/ActionSense_2.0.dmg"
+github_url: "https://github.com/xiaoyunchengzhu/ActionSense"
+screenshots:
+  - "https://www.xiaoniubuniu.com/images/products/purepaste/menubar.png"
+  - "https://www.xiaoniubuniu.com/images/products/purepaste/url-detect.png"
 ---
 
 ## The Problem
@@ -102,3 +109,29 @@ No backend. No analytics SDK. No tracking. Clipboard content, history, detection
 ---
 
 *Free & open source. If you find it useful, give it a Star ⭐*
+
+## Tips
+
+Right-click the menu bar icon to toggle between Plain Text Mode and PasteFlow Mode anytime.
+
+## FAQ
+
+### Is it free?
+
+Yes. MIT licensed. Source code on GitHub. No in-app purchases, no subscriptions.
+
+### Does it collect data?
+
+No. No backend, no analytics SDK, no network calls. Your clipboard content, history, and detection results never leave your Mac. Source code is public and auditable.
+
+### What macOS version do I need?
+
+macOS 14.0+. Xcode 15.0+ if building from source.
+
+### How is this different from Cmd+Shift+V?
+
+Cmd+Shift+V only strips formatting. ActionSense detects *what* you copied and offers relevant actions — open URLs, compose emails, calculate math, preview colors. It also records intent-based history, not just clipboard content.
+
+### Can I contribute?
+
+PRs welcome on [GitHub](https://github.com/xiaoyunchengzhu/ActionSense). Bug reports, feature requests, documentation improvements — all appreciated.
