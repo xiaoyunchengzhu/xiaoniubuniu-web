@@ -1,15 +1,16 @@
-/** 产品状态中文映射 */
+/** Product status labels */
 export const statusLabels: Record<string, string> = {
-  active: "已上线",
-  "in-development": "开发中",
-  archived: "已归档",
+  active: "Released",
+  "in-development": "In Development",
+  archived: "Archived",
 };
 
-/** 产品分类中文映射 */
+/** Product category labels */
 export const categoryLabels: Record<string, string> = {
-  iot: "物联网",
+  iot: "IoT",
   saas: "SaaS",
-  mobile: "移动端",
-  tool: "工具",
-  other: "其他",
+  mobile: "Mobile",
+  macOS: "macOS",
+  tool: "Tool",
+  other: "Other",
 };

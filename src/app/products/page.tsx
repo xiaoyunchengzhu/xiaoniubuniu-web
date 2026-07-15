@@ -4,9 +4,9 @@ import { getAllProducts } from "@/lib/products";
 import ProductFilter from "@/components/ProductFilter";
 
 export const metadata: Metadata = {
-  title: "独立产品",
+  title: "Apps — XiaoNiuBuNiu",
   description:
-    "小牛不牛的独立产品矩阵，包括物联网平台、合规工具等。记录从0到1的真实产品研发过程。",
+    "Indie Mac & iOS apps built and shipped solo. From idea to launch — real products, real stories.",
 };
 
 export default function ProductsPage() {
@@ -16,15 +16,15 @@ export default function ProductsPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       {/* 页面标题 */}
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 text-center">
-        独立产品
+        My Apps
       </h1>
       <p className="text-gray-500 text-center mb-10">
-        记录我独立开发的产品，从想法到上线，真实的研发过程。
+        Indie apps I&apos;ve built and shipped — from idea to launch.
       </p>
 
       <Suspense
         fallback={
-          <div className="text-center py-12 text-gray-400">加载中...</div>
+          <div className="text-center py-12 text-gray-400">Loading...</div>
         }
       >
         <ProductFilter products={products} />

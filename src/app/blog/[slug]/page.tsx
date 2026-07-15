@@ -21,7 +21,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: BlogPostPageProps): Metadata {
   const post = getPostBySlug(params.slug);
   if (!post) {
-    return { title: "文章未找到" };
+    return { title: "Post Not Found" };
   }
   return {
     title: post.title,
@@ -38,9 +38,9 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
 
 const categoryLabels: Record<string, string> = {
   "build-in-public": "Build in Public",
-  "chuhai-action": "出海实战",
-  toolbox: "工具箱",
-  "tech-deep": "技术深度",
+  "chuhai-action": "Going Global",
+  toolbox: "Tools",
+  "tech-deep": "Deep Tech",
 };
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
@@ -56,7 +56,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
-  // 同分类相关文章（排除当前文章，最多 3 篇）
+  // Related posts (same category, exclude current, max 3)
   const relatedPosts = allPosts
     .filter((p) => p.category === post.category && p.slug !== post.slug)
     .slice(0, 3);
@@ -73,12 +73,12 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     datePublished: post.date,
     author: {
       "@type": "Person",
-      name: "小牛不牛",
+      name: "XiaoNiuBuNiu",
       url: "https://www.xiaoniubuniu.com/about",
     },
     publisher: {
       "@type": "Person",
-      name: "小牛不牛",
+      name: "XiaoNiuBuNiu",
     },
     url: `https://www.xiaoniubuniu.com/blog/${post.slug}`,
     mainEntityOfPage: {
@@ -112,7 +112,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               <span className="text-sm text-gray-400">{post.date}</span>
               <span className="text-sm text-gray-400">·</span>
               <span className="text-sm text-gray-400">
-                约 {readingTime} 分钟读完
+                {readingTime} min read
               </span>
             </div>
 
@@ -191,14 +191,14 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             </ReactMarkdown>
           </div>
 
-          {/* 上一篇 / 下一篇 */}
+          {/* Previous / Next */}
           <nav className="mt-12 grid grid-cols-2 gap-4">
             {prevPost ? (
               <Link
                 href={`/blog/${prevPost.slug}`}
                 className="block border border-gray-200 rounded-xl p-4 hover:border-brand-orange hover:shadow-sm transition-all text-left"
               >
-                <span className="text-xs text-gray-400">← 上一篇</span>
+                <span className="text-xs text-gray-400">← Previous</span>
                 <p className="text-sm font-medium text-gray-900 mt-1 line-clamp-1">
                   {prevPost.title}
                 </p>
@@ -211,7 +211,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                 href={`/blog/${nextPost.slug}`}
                 className="block border border-gray-200 rounded-xl p-4 hover:border-brand-orange hover:shadow-sm transition-all text-right"
               >
-                <span className="text-xs text-gray-400">下一篇 →</span>
+                <span className="text-xs text-gray-400">Next →</span>
                 <p className="text-sm font-medium text-gray-900 mt-1 line-clamp-1">
                   {nextPost.title}
                 </p>
@@ -221,11 +221,11 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             )}
           </nav>
 
-          {/* 相关文章 */}
+          {/* Related Posts */}
           {relatedPosts.length > 0 && (
             <section className="mt-12">
               <h3 className="text-lg font-bold text-gray-900 mb-4">
-                📎 相关文章
+                📎 Related Posts
               </h3>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {relatedPosts.map((rp) => (
@@ -248,13 +248,13 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="mt-12">
             <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 text-center">
               <p className="text-gray-700 font-medium mb-3">
-                想聊出海或合作？把你的需求砸过来 →
+                Want to chat about indie dev or collaborate? Let&apos;s talk →
               </p>
               <Link
                 href="/about"
                 className="inline-block px-6 py-2.5 rounded-lg bg-brand-orange text-white font-medium hover:bg-brand-orange-dark transition-colors"
               >
-                联系我
+                Get in Touch
               </Link>
             </div>
           </div>

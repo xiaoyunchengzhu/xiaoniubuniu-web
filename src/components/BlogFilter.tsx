@@ -10,11 +10,11 @@ interface BlogFilterProps {
 }
 
 const categoryOptions = [
-  { key: "all", label: "全部" },
+  { key: "all", label: "All" },
   { key: "build-in-public", label: "Build in Public" },
-  { key: "chuhai-action", label: "出海实战" },
-  { key: "toolbox", label: "工具箱" },
-  { key: "tech-deep", label: "技术深度" },
+  { key: "chuhai-action", label: "Going Global" },
+  { key: "toolbox", label: "Tools" },
+  { key: "tech-deep", label: "Deep Tech" },
 ];
 
 const POSTS_PER_PAGE = 9;
@@ -72,7 +72,7 @@ export default function BlogFilter({ posts }: BlogFilterProps) {
         } else {
           params.set("category", updates.category);
         }
-        params.delete("page"); // 切换分类时重置页码
+        params.delete("page");
       }
       if (updates.search !== undefined) {
         if (updates.search) {
@@ -80,7 +80,7 @@ export default function BlogFilter({ posts }: BlogFilterProps) {
         } else {
           params.delete("search");
         }
-        params.delete("page"); // 搜索时重置页码
+        params.delete("page");
       }
       if (updates.page !== undefined) {
         if (updates.page > 1) {
@@ -97,7 +97,7 @@ export default function BlogFilter({ posts }: BlogFilterProps) {
 
   return (
     <div>
-      {/* 搜索框 */}
+      {/* Search */}
       <form
         className="max-w-md mx-auto mb-8"
         onSubmit={(e) => {
@@ -113,7 +113,7 @@ export default function BlogFilter({ posts }: BlogFilterProps) {
             name="search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="搜索文章..."
+            placeholder="Search posts..."
             className="w-full px-4 py-2.5 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none text-gray-900"
           />
           <svg
@@ -132,7 +132,7 @@ export default function BlogFilter({ posts }: BlogFilterProps) {
         </div>
       </form>
 
-      {/* 分类按钮组 */}
+      {/* Category filters */}
       <div className="flex flex-wrap justify-center gap-2 mb-10">
         {categoryOptions.map((cat) => (
           <button
@@ -168,11 +168,11 @@ export default function BlogFilter({ posts }: BlogFilterProps) {
                   onClick={() => updateParams({ page: currentPage - 1 })}
                   className="text-sm px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:border-brand-orange hover:text-brand-orange transition-colors"
                 >
-                  上一页
+                  Previous
                 </button>
               ) : (
                 <span className="text-sm px-4 py-2 rounded-lg border border-gray-200 text-gray-300 cursor-not-allowed">
-                  上一页
+                  Previous
                 </span>
               )}
 
@@ -185,11 +185,11 @@ export default function BlogFilter({ posts }: BlogFilterProps) {
                   onClick={() => updateParams({ page: currentPage + 1 })}
                   className="text-sm px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:border-brand-orange hover:text-brand-orange transition-colors"
                 >
-                  下一页
+                  Next
                 </button>
               ) : (
                 <span className="text-sm px-4 py-2 rounded-lg border border-gray-200 text-gray-300 cursor-not-allowed">
-                  下一页
+                  Next
                 </span>
               )}
             </div>
@@ -198,10 +198,10 @@ export default function BlogFilter({ posts }: BlogFilterProps) {
       ) : (
         <div className="text-center py-16 text-gray-400">
           <p className="text-lg">
-            {searchQuery ? "没有找到匹配的文章" : "这个分类下还没有文章"}
+            {searchQuery ? "No matching posts found" : "No posts in this category yet"}
           </p>
           <p className="text-sm mt-2">
-            {searchQuery ? "换一个关键词试试" : "内容正在路上，敬请期待 🐂"}
+            {searchQuery ? "Try a different keyword" : "Content on the way, stay tuned 🐂"}
           </p>
         </div>
       )}

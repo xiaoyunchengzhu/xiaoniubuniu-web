@@ -6,12 +6,10 @@ import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 
 const navLinks = [
-  { href: "/", label: "首页" },
-  { href: "/blog", label: "博客" },
-  { href: "/products", label: "产品" },
-  { href: "/toolbox", label: "工具箱" },
-  { href: "/services", label: "服务" },
-  { href: "/about", label: "关于" },
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+  { href: "/products", label: "Apps" },
+  { href: "/about", label: "About" },
 ];
 
 export default function Navbar() {
@@ -27,10 +25,12 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-xl font-bold text-gray-900 hover:text-brand-orange transition-colors">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-xl font-bold text-gray-900 hover:text-brand-orange transition-colors"
+          >
             <span>🐂</span>
-            <span>小牛不牛</span>
+            <span>XiaoNiuBuNiu</span>
           </Link>
 
           {/* Desktop nav */}
@@ -57,7 +57,7 @@ export default function Navbar() {
           <button
             className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="切换菜单"
+            aria-label="Toggle menu"
           >
             {mobileOpen ? <HiX size={24} /> : <HiMenu size={24} />}
           </button>

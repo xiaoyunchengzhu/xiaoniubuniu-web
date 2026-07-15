@@ -28,7 +28,7 @@ export function generateMetadata({
 }: ProductDetailPageProps): Metadata {
   const product = getProductBySlug(params.slug);
   if (!product) {
-    return { title: "产品未找到" };
+    return { title: "Product Not Found" };
   }
   return {
     title: product.title,
@@ -108,7 +108,7 @@ export default function ProductDetailPage({
                 rel="noopener noreferrer"
                 className="text-sm px-3 py-1 rounded-lg bg-brand-orange text-white hover:bg-brand-orange-dark transition-colors ml-auto"
               >
-                访问产品 →
+                Visit →
               </a>
             )}
           </div>
@@ -180,7 +180,7 @@ export default function ProductDetailPage({
             href={`/products/${prevProduct.slug}`}
             className="block border border-gray-200 rounded-xl p-4 hover:border-brand-orange hover:shadow-sm transition-all text-left"
           >
-            <span className="text-xs text-gray-400">← 上一个产品</span>
+            <span className="text-xs text-gray-400">← Previous</span>
             <p className="text-sm font-medium text-gray-900 mt-1 line-clamp-1">
               {prevProduct.title}
             </p>
@@ -193,7 +193,7 @@ export default function ProductDetailPage({
             href={`/products/${nextProduct.slug}`}
             className="block border border-gray-200 rounded-xl p-4 hover:border-brand-orange hover:shadow-sm transition-all text-right"
           >
-            <span className="text-xs text-gray-400">下一个产品 →</span>
+            <span className="text-xs text-gray-400">Next →</span>
             <p className="text-sm font-medium text-gray-900 mt-1 line-clamp-1">
               {nextProduct.title}
             </p>
@@ -207,13 +207,13 @@ export default function ProductDetailPage({
       <div className="max-w-[720px] mx-auto mt-12">
         <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 text-center">
           <p className="text-gray-700 font-medium mb-3">
-            有合作想法或想聊聊产品？
+            Have a product idea or want to collaborate?
           </p>
           <Link
             href="/about"
             className="inline-block px-6 py-2.5 rounded-lg bg-brand-orange text-white font-medium hover:bg-brand-orange-dark transition-colors"
           >
-            联系我
+            Get in Touch
           </Link>
         </div>
       </div>

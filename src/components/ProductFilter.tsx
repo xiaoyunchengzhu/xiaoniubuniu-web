@@ -10,20 +10,20 @@ interface ProductFilterProps {
 }
 
 const statusOptions = [
-  { key: "all", label: "全部状态" },
-  { key: "active", label: "已上线" },
-  { key: "in-development", label: "开发中" },
-  { key: "archived", label: "已归档" },
+  { key: "all", label: "All Status" },
+  { key: "active", label: "Released" },
+  { key: "in-development", label: "In Development" },
+  { key: "archived", label: "Archived" },
 ];
 
 const categoryOptions = [
-  { key: "all", label: "全部分类" },
-  { key: "iot", label: "物联网" },
+  { key: "all", label: "All Categories" },
+  { key: "iot", label: "IoT" },
   { key: "saas", label: "SaaS" },
-  { key: "mobile", label: "移动端" },
+  { key: "mobile", label: "Mobile" },
   { key: "macOS", label: "macOS" },
-  { key: "tool", label: "工具" },
-  { key: "other", label: "其他" },
+  { key: "tool", label: "Tool" },
+  { key: "other", label: "Other" },
 ];
 
 export default function ProductFilter({ products }: ProductFilterProps) {
@@ -78,7 +78,7 @@ export default function ProductFilter({ products }: ProductFilterProps) {
 
   return (
     <div>
-      {/* 状态筛选 */}
+      {/* Status filter */}
       <div className="flex flex-wrap justify-center gap-2 mb-4">
         {statusOptions.map((opt) => (
           <button
@@ -95,7 +95,7 @@ export default function ProductFilter({ products }: ProductFilterProps) {
         ))}
       </div>
 
-      {/* 分类筛选 */}
+      {/* Category filter */}
       <div className="flex flex-wrap justify-center gap-2 mb-10">
         {categoryOptions.map((opt) => (
           <button
@@ -121,8 +121,8 @@ export default function ProductFilter({ products }: ProductFilterProps) {
         </div>
       ) : (
         <div className="text-center py-16 text-gray-400">
-          <p className="text-lg">没有匹配的产品</p>
-          <p className="text-sm mt-2">换个筛选条件试试 🐂</p>
+          <p className="text-lg">No matching products</p>
+          <p className="text-sm mt-2">Try a different filter 🐂</p>
         </div>
       )}
     </div>

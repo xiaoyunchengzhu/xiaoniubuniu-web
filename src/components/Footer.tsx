@@ -8,7 +8,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Copyright */}
           <p className="text-sm text-gray-500">
-            © {new Date().getFullYear()} 小牛不牛 | Powered by Next.js &amp; Cloudflare
+            © {new Date().getFullYear()} 小牛不牛 / XiaoNiuBuNiu &mdash; Indie Mac &amp; iOS App Developer
+          </p>
+          <p className="text-xs text-gray-400">
+            Built with Next.js &amp; Cloudflare
           </p>
 
           {/* Social links */}
