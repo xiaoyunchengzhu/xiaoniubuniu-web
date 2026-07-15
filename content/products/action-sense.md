@@ -6,7 +6,7 @@ category: "macOS"
 icon: "/images/products/purepaste/icon_256.png"
 platforms: ["macOS"]
 tags: ["macOS", "SwiftUI", "clipboard", "productivity", "open source"]
-description: "A smart clipboard assistant for macOS. Auto plain-text cleaning + PasteFlow detection of URLs, emails, colors, math, and more. Native, local, open source."
+description: "What you copy, instantly actionable. Copy a URL → open it. Copy a color → preview it. Copy math → calculate it. All at your cursor, no window needed. Native, local, open source."
 link: "https://github.com/xiaoyunchengzhu/ActionSense"
 download_link: "/downloads/ActionSense_2.0.dmg"
 github_url: "https://github.com/xiaoyunchengzhu/ActionSense"
@@ -15,100 +15,73 @@ screenshots:
   - "https://www.xiaoniubuniu.com/images/products/purepaste/url-detect.png"
 ---
 
-## The Problem
+## What You Copy, Instantly Actionable
 
-Copying from a webpage and pasting into Notion, Slack, or an email — the fonts break, the colors bleed, the links embed themselves, and the spacing collapses. Cmd+Shift+V is a half-fix: some apps don't support it, shortcuts conflict, and it never tells you *what* you just copied was a URL, an email, or a hex color.
+You copy things hundreds of times a day. URLs, colors, email addresses, math expressions, JSON blobs. Every time, you figure out what to do next — open a browser, launch a color picker, paste into a calculator, fire up a formatter.
 
-**ActionSense fixes "what happens after you copy."**
+ActionSense removes that step. It detects what you copied and puts the right action at your cursor. No keyboard shortcut. No window. No context switch.
 
-## What is ActionSense?
-
-**ActionSense** is an open-source macOS menu bar app. It lives in your menu bar, watches your clipboard, and does two things:
-
-- **Plain Text Mode**: auto-strips rich text formatting, cleans whitespace and CJK spacing
-- **PasteFlow Mode**: detects *what* you copied and pops up a one-click action panel at your cursor
-
-All processing is local. Nothing ever leaves your Mac.
-
-## PasteFlow — Your Clipboard Just Got Smarter
-
-PasteFlow detects what you copied and offers the right action instantly:
-
-| Type | Example | Action |
-|------|---------|--------|
-| URL | `https://github.com` | Open in Browser (+ Open Repo for git repos) |
-| Email | `hello@example.com` | Compose Mail |
-| Phone | `13812345678` | Call |
-| Color | `#FF5733` | Color preview + Copy HEX / RGB |
-| Date/Time | `2024-01-15 14:00` | Add to Calendar |
-| Math | `(35+47)*1.2` | Auto-calculate result |
-| Coordinates | `39.9042, 116.4074` | Open in Maps |
-| JSON | `{"key":"val"}` | Formatted preview + Format / Minify |
-| Rich HTML | Web content with formatting | Convert to Markdown / Plain Text |
-
-
+**Copy → action appears at your cursor → Enter to trigger.**
 
 ![PasteFlow Demo](https://www.xiaoniubuniu.com/images/products/purepaste/menubar.png)
 
-![URL Detection](https://www.xiaoniubuniu.com/images/products/purepaste/url-detect.png)
-![Color Preview](https://www.xiaoniubuniu.com/images/products/purepaste/color-detect.png)
-![Math Calculation](https://www.xiaoniubuniu.com/images/products/purepaste/math-detect.png)
+## What It Detects
 
-## Intent History — Not Just What You Copied, But What You Did
+| You copy | ActionSense shows |
+|----------|------------------|
+| `https://github.com/xiaoyunchengzhu` | Open in Browser |
+| `#FF5733` | Color preview + Copy HEX / RGB / UIColor |
+| `(35+47)*1.2` | Auto-calculate result |
+| `{"key":"value"}` | Format / Minify |
+| `hello@example.com` | Compose Email |
+| `39.9042, 116.4074` | Open in Maps |
+| `2026-01-15 14:00` | Add to Calendar |
+| `13812345678` | Call |
+| Rich HTML from a webpage | Convert to Markdown / Plain Text |
 
-Traditional clipboard managers only record *what you copied*. ActionSense records *what you did with it*:
+Plus plain text mode: auto-strips formatting when you just want clean paste.
 
-- 🟢 Intent fulfilled: copied URL → opened browser
-- 🟠 Detected but not acted: copied color → did nothing
-- ⚪ Plain text: auto-cleaned formatting
+## Why Not Just Use...?
 
-Filter by type, mode, or keyword. Up to 5000 entries, stored locally.
+**...Maccy?** Maccy is a clipboard history viewer. You copy, open Maccy, find the item, double-click. ActionSense skips the window entirely — the action appears at your cursor the moment you copy.
+
+**...Paste?** Paste is a beautiful history manager with folders and sync. $14.99/year. ActionSense is free, open source, and does a different job: it acts on what you copy *now*, not what you copied *yesterday*.
+
+**...Raycast or Alfred?** Raycast is a launcher. You type a shortcut, search for an action, hit enter. ActionSense works in reverse — it sees what you copied and brings the action to you. No typing, no searching.
+
+**...Keyboard Maestro?** KM can do this. If you build the macros yourself. ActionSense works out of the box, with zero configuration.
+
+**ActionSense is the only tool that brings the action to your cursor.** Everything else requires you to go find the tool.
+
+## Who Uses It
+
+**Developers** — Copy a GitHub URL → open it. Copy JSON → format it. Copy an error message → diagnose it (coming in Pro). Zero keystrokes between copy and action.
+
+**Designers** — Copy a hex color from anywhere → instant preview + copy in whatever format you need: HEX, RGB, UIColor, SwiftUI Color, CSS hex.
+
+**Writers** — Copy rich text from a webpage → paste clean markdown into your editor. Copy a paragraph → translate, summarize, or improve (Pro).
+
+**Anyone who copies URLs, colors, or math** — which is everyone.
+
+## Intent History
+
+Clipboard history tells you *what* you copied. ActionSense tells you *what you did with it*.
+
+- 🟢 Copied URL → opened browser
+- 🟠 Copied color → previewed but didn't convert
+- ⚪ Plain text → auto-cleaned formatting
+
+Filter by type, mode, or keyword. Up to 5,000 entries. Stored locally.
 
 ![Intent History](https://www.xiaoniubuniu.com/images/products/purepaste/history.png)
 
-## Tech Stack — Pure Native, Zero Dependencies
+## Zero Dependencies, Zero Data Collection
 
 ```
 SwiftUI + AppKit + MenuBarExtra + NSPasteboard + Combine
 ```
 
-- **Clipboard polling** — `NSPasteboard.changeCount` every 0.5s, dual-guard dead-loop prevention
-- **Math evaluator** — hand-written recursive descent parser, avoids `NSExpression` format-string traps
-- **Floating panel** — `NSWindow .nonactivatingPanel`, appears at cursor without stealing focus
-- **History storage** — plain JSON file, in-memory filtering, no database
-- **5 languages** — English / 中文 / 日本語 / Français / Deutsch, manual switch, restart to apply
-
-17 Swift source files. Clean architecture, well-commented.
-
-## Installation
-
-**Option 1: Build from Source**
-```bash
-git clone https://github.com/xiaoyunchengzhu/ActionSense.git
-cd ActionSense
-open ActionSense.xcodeproj
-# Cmd+R to run
-```
-macOS 14.0+, Xcode 15.0+. No Apple Developer account needed.
-
-**Option 2: Download DMG**
-
-👉 [**Download ActionSense 2.0 DMG**](/downloads/ActionSense_2.0.dmg) (573 KB, macOS 14+)
-
-Drag to `/Applications`. On first launch, right-click → Open to bypass Gatekeeper.
-
-## Privacy
-
-No backend. No analytics SDK. No tracking. Clipboard content, history, detection results — everything stays on your Mac. Source code is public and auditable.
-
-## Links
-
-- GitHub: [github.com/xiaoyunchengzhu/ActionSense](https://github.com/xiaoyunchengzhu/ActionSense)
-- Product page: [xiaoniubuniu.com/products/action-sense](https://www.xiaoniubuniu.com/products/action-sense/)
-
----
-
-*Free & open source. If you find it useful, give it a Star ⭐*
+No CocoaPods. No SPM packages. No backend. No analytics. Your clipboard never leaves your Mac. Source code is public and auditable.
 
 ## Tips
 
@@ -118,20 +91,28 @@ Right-click the menu bar icon to toggle between Plain Text Mode and PasteFlow Mo
 
 ### Is it free?
 
-Yes. MIT licensed. Source code on GitHub. No in-app purchases, no subscriptions.
+Yes. MIT licensed. Free, open source, no in-app purchases. A Pro version with AI Actions and an Advanced Action Builder is planned for late 2026. The core detection engine stays free forever.
 
 ### Does it collect data?
 
-No. No backend, no analytics SDK, no network calls. Your clipboard content, history, and detection results never leave your Mac. Source code is public and auditable.
+No. No backend, no analytics SDK, no network calls. Clipboard content, history, detection results — everything stays on your Mac.
 
-### What macOS version do I need?
+### What macOS version?
 
 macOS 14.0+. Xcode 15.0+ if building from source.
 
-### How is this different from Cmd+Shift+V?
+### How is this different from Maccy?
 
-Cmd+Shift+V only strips formatting. ActionSense detects *what* you copied and offers relevant actions — open URLs, compose emails, calculate math, preview colors. It also records intent-based history, not just clipboard content.
+Maccy shows you what you copied. ActionSense shows you what you can *do* with what you copied. They work great together — Maccy for history, ActionSense for instant actions.
+
+### How is this different from Raycast?
+
+Raycast is a launcher. You go to it. ActionSense works the other way — it comes to you at your cursor, no shortcut, no search. Think of it as the opposite interaction model.
+
+### Can I add my own actions?
+
+Not yet. Custom Actions and an Advanced Action Builder are planned for the Pro version. If you have ideas for built-in detectors you'd like to see, open an issue on GitHub.
 
 ### Can I contribute?
 
-PRs welcome on [GitHub](https://github.com/xiaoyunchengzhu/ActionSense). Bug reports, feature requests, documentation improvements — all appreciated.
+PRs welcome on [GitHub](https://github.com/xiaoyunchengzhu/ActionSense).

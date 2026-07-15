@@ -184,9 +184,15 @@ export default function ProductDetailPage({
             </a>
           )}
         </div>
-        <p className="text-xs text-gray-400 mt-3">
-          Free · Open Source · macOS 14+
+        <p className="text-xs text-gray-400 mt-3 mb-4">
+          Free · Open Source · macOS 14+ · No account needed
         </p>
+        {/* Value-in-5-seconds */}
+        <div className="flex flex-wrap justify-center gap-3 text-sm text-gray-600">
+          <span className="px-3 py-1 bg-gray-50 rounded-full">No shortcut</span>
+          <span className="px-3 py-1 bg-gray-50 rounded-full">No window</span>
+          <span className="px-3 py-1 bg-gray-50 rounded-full">No setup</span>
+        </div>
       </section>
 
       {/* ===== Screenshots ===== */}
