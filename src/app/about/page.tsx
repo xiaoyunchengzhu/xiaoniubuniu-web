@@ -47,7 +47,7 @@ export default function AboutPage() {
       "Embedded Systems",
       "IoT",
     ],
-    email: "xiaoyunchengzhu@gmail.com",
+    email: "xiaoniubuniu@gmail.com",
   };
 
   return (
@@ -100,13 +100,13 @@ export default function AboutPage() {
               Building something interesting? Let&apos;s chat.
             </p>
             <a
-              href="mailto:xiaoyunchengzhu@gmail.com"
+              href="mailto:xiaoniubuniu@gmail.com"
               className="block text-sm text-center px-4 py-2 rounded-lg bg-brand-orange text-white font-medium hover:bg-brand-orange-dark transition-colors"
             >
               📧 Email Me
             </a>
             <p className="text-xs text-gray-400 mt-2 text-center">
-              xiaoyunchengzhu@gmail.com
+              xiaoniubuniu@gmail.com
             </p>
           </div>
         </div>
@@ -182,10 +182,10 @@ export default function AboutPage() {
               <li>
                 📧 Email:{" "}
                 <a
-                  href="mailto:xiaoyunchengzhu@gmail.com"
+                  href="mailto:xiaoniubuniu@gmail.com"
                   className="text-brand-orange hover:underline"
                 >
-                  xiaoyunchengzhu@gmail.com
+                  xiaoniubuniu@gmail.com
                 </a>
               </li>
               <li>

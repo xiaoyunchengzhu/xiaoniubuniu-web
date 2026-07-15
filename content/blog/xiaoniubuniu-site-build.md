@@ -209,4 +209,4 @@ Cloudflare Pages 期望所有页面都是纯静态的。用 `searchParams` 会�
 
 > **相关阅读**：[独立开发者找不到产品方向？我用大模型建了个需求挖掘系统](/blog/require-dis) —— 同一个 Claude Code 工具，用来找产品方向和用来搭网站，思路完全不同。
 >
-> 如果你也想搭一个类似的站，或者对这套方案有疑问，[看看我的建站服务](/services) 或 [直接联系我](mailto:xiaoyunchengzhu@gmail.com)。帮你从 0 到 1 搞定。
+> 如果你也想搭一个类似的站，或者对这套方案有疑问，[看看我的建站服务](/services) 或 [直接联系我](mailto:xiaoniubuniu@gmail.com)。帮你从 0 到 1 搞定。
