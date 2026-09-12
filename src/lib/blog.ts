@@ -9,6 +9,7 @@ export interface BlogPost {
   category: string;
   tags: string[];
   description: string;
+  image?: string;
   content: string;
 }
 
@@ -40,6 +41,7 @@ export function getAllPosts(): BlogPost[] {
         category: data.category || "uncategorized",
         tags: data.tags || [],
         description: data.description || "",
+        image: data.image || undefined,
         content,
       };
     });
@@ -68,6 +70,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     category: data.category || "uncategorized",
     tags: data.tags || [],
     description: data.description || "",
+    image: data.image || undefined,
     content,
   };
 }

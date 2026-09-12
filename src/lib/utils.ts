@@ -24,6 +24,17 @@ export interface TocItem {
   level: 2 | 3;
 }
 
+/**
+ * 标题文本 → URL 锚点 id（小写，空格换连字符，移除特殊字符）
+ * 渲染端和 TOC 提取共用，保证两边生成的 id 一致
+ */
+export function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w一-鿿-]/g, "");
+}
+
 export function extractToc(content: string): TocItem[] {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
   const items: TocItem[] = [];
@@ -32,12 +43,7 @@ export function extractToc(content: string): TocItem[] {
   while ((match = headingRegex.exec(content)) !== null) {
     const level = match[1].length as 2 | 3;
     const text = match[2].trim();
-    // 生成与 react-markdown 兼容的 id（小写，空格替换为连字符，移除特殊字符）
-    const id = text
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w一-鿿-]/g, "");
-    items.push({ id, text, level });
+    items.push({ id: slugifyHeading(text), text, level });
   }
 
   return items;

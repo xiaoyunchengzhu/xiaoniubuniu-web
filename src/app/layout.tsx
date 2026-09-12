@@ -6,30 +6,32 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.xiaoniubuniu.com"),
   title: {
-    default: "XiaoNiuBuNiu — Indie Mac & iOS App Developer",
+    default: "XiaoNiuBuNiu — Independent Software Maker",
     template: "%s | XiaoNiuBuNiu",
   },
   description:
-    "Indie developer building Mac & iOS apps solo. 10yr full-stack veteran. Building in public — real stories, real products.",
-  keywords: ["indie developer", "Mac app", "iOS app", "full-stack", "SwiftUI", "solo developer"],
+    "Independent Software Maker. I build useful software products across desktop & mobile. 10yr full-stack veteran. Building in public — real stories, real products.",
+  keywords: ["independent software maker", "indie developer", "desktop app", "web app", "mobile app", "full-stack"],
   authors: [{ name: "XiaoNiuBuNiu" }],
-  alternates: {
-    canonical: "/",
-  },
+  // canonical 不在根布局声明：会被所有子页继承，导致文章页全被判定为首页重复页；
+  // 各页面在自身 metadata 里声明自己的 canonical
+  // 默认社交分享图：子页未声明 images 时继承这张（工作照）
   openGraph: {
-    title: "XiaoNiuBuNiu — Indie Mac & iOS App Developer",
+    title: "XiaoNiuBuNiu — Independent Software Maker",
     description:
-      "Indie developer building Mac & iOS apps solo. 10yr full-stack veteran. Building in public.",
+      "Independent Software Maker. Building useful software products across desktop & mobile.",
     url: "https://www.xiaoniubuniu.com",
     type: "website",
     locale: "en_US",
     siteName: "XiaoNiuBuNiu",
+    images: [{ url: "/images/common/photo-work.jpg", alt: "XiaoNiuBuNiu — Independent Software Maker" }],
   },
   twitter: {
-    card: "summary",
-    title: "XiaoNiuBuNiu — Indie Mac & iOS App Developer",
+    card: "summary_large_image",
+    title: "XiaoNiuBuNiu — Independent Software Maker",
     description:
-      "Indie developer building Mac & iOS apps solo. 10yr full-stack veteran.",
+      "Independent Software Maker. Building useful software products across desktop & mobile.",
+    images: ["/images/common/photo-work.jpg"],
   },
   robots: {
     index: true,
@@ -55,7 +57,7 @@ export default function RootLayout({
               name: "XiaoNiuBuNiu",
               url: "https://www.xiaoniubuniu.com",
               description:
-                "Indie developer building Mac & iOS apps solo. 10yr full-stack veteran. Building in public.",
+                "Independent Software Maker. Building useful software products across desktop & mobile.",
               author: {
                 "@type": "Person",
                 name: "XiaoNiuBuNiu",
@@ -63,9 +65,8 @@ export default function RootLayout({
                 sameAs: [
                   "https://github.com/xiaoyunchengzhu",
                   "https://x.com/xiaoyunchengzhu",
-                  "https://www.zhihu.com/people/zhang-shi-yu-5-24",
                 ],
-                jobTitle: "Indie Mac & iOS App Developer",
+                jobTitle: "Independent Software Maker",
               },
             }),
           }}

@@ -4,18 +4,11 @@ import { useState, useEffect, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import BlogCard from "./BlogCard";
 import type { BlogPost } from "@/lib/blog";
+import { blogCategoryOptions as categoryOptions } from "@/lib/blog-constants";
 
 interface BlogFilterProps {
   posts: BlogPost[];
 }
-
-const categoryOptions = [
-  { key: "all", label: "All" },
-  { key: "build-in-public", label: "Build in Public" },
-  { key: "chuhai-action", label: "Going Global" },
-  { key: "toolbox", label: "Tools" },
-  { key: "tech-deep", label: "Deep Tech" },
-];
 
 const POSTS_PER_PAGE = 9;
 

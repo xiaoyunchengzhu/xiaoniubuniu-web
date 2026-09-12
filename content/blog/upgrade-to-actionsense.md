@@ -1,7 +1,9 @@
 ---
 title: "From PurePaste to ActionSense — A Major Upgrade to My macOS Clipboard Tool"
 date: "2026-07-15"
+image: "/images/blog/upgrade-to-actionsense.png"
 platform: "Blog"
+category: "build-in-public"
 description: "PurePaste has been renamed to ActionSense and received a major architecture overhaul: detector protocol system, 5-language support, dependency injection, and a cleaner type set. Here's what changed and why."
 tags: ["macOS", "SwiftUI", "open source", "refactoring", "ActionSense"]
 ---
@@ -53,7 +55,7 @@ The NSPasteboard polling loop was tangled inside the ViewModel alongside mode sw
 
 ### Fewer detector types, higher precision
 
-The initial release tried to cover everything: IP addresses, Chinese tracking numbers, address keywords. Several of these turned out to be either low-utility (IP Ping in an era where Terminal.app exists) or overly region-specific (Chinese address patterns that trigger false positives on any text containing 市 or 路).
+The initial release tried to cover everything: IP addresses, Chinese tracking numbers, address keywords. Several of these turned out to be either low-utility (IP Ping in an era where Terminal.app exists) or overly region-specific (Chinese address patterns that trigger false positives on any text containing 市 ("city") or 路 ("road")).
 
 The current set is nine types: URL, Email, Phone, Date/Time, Color, Math, Coordinates, JSON, and Rich HTML. Each one justifies its existence with a clear, frequent use case.
 
@@ -82,10 +84,14 @@ open ActionSense.xcodeproj
 # Cmd+R
 ```
 
-Or download the DMG from [xiaoniubuniu.com/products/action-sense](https://www.xiaoniubuniu.com/products/action-sense/).
+Or download the DMG from [xiaoniubuniu.com/products/action-sense](/products/action-sense).
 
 macOS 14.0+. Xcode 15.0+. MIT license.
 
 ---
 
 *If you find it useful, a GitHub Star goes a long way.*
+
+---
+
+*This article was drafted with Claude Code assistance based on the actual refactoring notes and source code of ActionSense v2. All architectural decisions and code examples are from the real project.*

@@ -19,6 +19,8 @@ body {
 .prose {
   max-width: 720px;
   line-height: 1.8;
+  /* 长 URL / 不可断行 token 在窄屏折行，避免撑破页面 */
+  overflow-wrap: break-word;
 }
 
 .prose h1,

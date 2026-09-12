@@ -33,7 +33,7 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
   return (
     <nav className="hidden lg:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
       <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-        目录
+        Contents
       </h4>
       <ul className="space-y-1.5 border-l border-gray-200">
         {items.map((item) => (

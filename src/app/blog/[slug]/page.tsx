@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAllPostSlugs, getPostBySlug, getAllPosts } from "@/lib/blog";
-import { getReadingTime, extractToc } from "@/lib/utils";
+import { getReadingTime, extractToc, slugifyHeading } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -8,9 +8,21 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import TableOfContents from "@/components/TableOfContents";
+import { LuPaperclip } from "react-icons/lu";
+import { blogCategoryLabels } from "@/lib/blog-constants";
+
+// 站点默认社交分享图（文章没有封面图时兜底）
+const DEFAULT_OG_IMAGE = "/images/common/photo-work.jpg";
 
 interface BlogPostPageProps {
   params: { slug: string };
+}
+
+// 从 react-markdown 的 children 中取纯文本（children 可能是字符串或节点数组）
+function headingPlainText(children: unknown): string {
+  if (typeof children === "string") return children;
+  if (Array.isArray(children)) return children.map(headingPlainText).join("");
+  return "";
 }
 
 export function generateStaticParams() {
@@ -23,25 +35,27 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
   if (!post) {
     return { title: "Post Not Found" };
   }
+  const ogImage = post.image || DEFAULT_OG_IMAGE;
   return {
     title: post.title,
     description: post.description,
+    alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
       publishedTime: post.date,
       tags: post.tags,
+      images: [{ url: ogImage, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [ogImage],
     },
   };
 }
-
-const categoryLabels: Record<string, string> = {
-  "build-in-public": "Build in Public",
-  "chuhai-action": "Going Global",
-  toolbox: "Tools",
-  "tech-deep": "Deep Tech",
-};
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = getPostBySlug(params.slug);
@@ -61,7 +75,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     .filter((p) => p.category === post.category && p.slug !== post.slug)
     .slice(0, 3);
 
-  const categoryLabel = categoryLabels[post.category] || post.category;
+  const categoryLabel = blogCategoryLabels[post.category] || post.category;
   const readingTime = getReadingTime(post.content);
   const tocItems = extractToc(post.content);
 
@@ -70,7 +84,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     "@type": "Article",
     headline: post.title,
     description: post.description,
+    image: `https://www.xiaoniubuniu.com${post.image || DEFAULT_OG_IMAGE}`,
     datePublished: post.date,
+    dateModified: post.date,
     author: {
       "@type": "Person",
       name: "XiaoNiuBuNiu",
@@ -141,6 +157,14 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
+                // 表格套横向滚动容器，防止窄屏（手机）把整页撑出横向滚动
+                table({ children }) {
+                  return (
+                    <div className="w-full overflow-x-auto my-[1em]">
+                      <table style={{ margin: 0 }}>{children}</table>
+                    </div>
+                  );
+                },
                 code({ className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || "");
                   const codeString = String(children).replace(/\n$/, "");
@@ -173,16 +197,40 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                     </code>
                   );
                 },
+                // 站内链接同标签页跳转，只有外链才新标签页打开
                 a({ children, href, ...props }) {
+                  const isExternal = !!href && /^https?:\/\//.test(href);
                   return (
                     <a
                       href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      {...(isExternal
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
                       {...props}
                     >
                       {children}
                     </a>
+                  );
+                },
+                // 注入锚点 id，供右侧 TOC 跳转（与 extractToc 共用 slugifyHeading）
+                h2({ children }) {
+                  const id = slugifyHeading(headingPlainText(children));
+                  return (
+                    <h2 id={id}>
+                      <a href={`#${id}`} className="no-underline">
+                        {children}
+                      </a>
+                    </h2>
+                  );
+                },
+                h3({ children }) {
+                  const id = slugifyHeading(headingPlainText(children));
+                  return (
+                    <h3 id={id}>
+                      <a href={`#${id}`} className="no-underline">
+                        {children}
+                      </a>
+                    </h3>
                   );
                 },
               }}
@@ -224,10 +272,11 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
             <section className="mt-12">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
-                📎 Related Posts
+              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <LuPaperclip size={18} className="text-brand-orange" />
+                Related Posts
               </h3>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {relatedPosts.map((rp) => (
                   <Link
                     key={rp.slug}

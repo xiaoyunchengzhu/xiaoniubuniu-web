@@ -1,6 +1,7 @@
 /** Product status labels */
 export const statusLabels: Record<string, string> = {
   active: "Released",
+  released: "Released",
   "in-development": "In Development",
   archived: "Archived",
 };

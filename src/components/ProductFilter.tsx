@@ -11,7 +11,7 @@ interface ProductFilterProps {
 
 const statusOptions = [
   { key: "all", label: "All Status" },
-  { key: "active", label: "Released" },
+  { key: "released", label: "Released" },
   { key: "in-development", label: "In Development" },
   { key: "archived", label: "Archived" },
 ];

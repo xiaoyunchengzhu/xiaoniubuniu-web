@@ -1,20 +1,13 @@
 import Link from "next/link";
 import type { BlogPost } from "@/lib/blog";
+import { blogCategoryLabels } from "@/lib/blog-constants";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
-const categoryLabels: Record<string, string> = {
-  all: "全部",
-  "build-in-public": "Build in Public",
-  "chuhai-action": "出海实战",
-  toolbox: "工具箱",
-  "tech-deep": "技术深度",
-};
-
 export default function BlogCard({ post }: BlogCardProps) {
-  const categoryLabel = categoryLabels[post.category] || post.category;
+  const categoryLabel = blogCategoryLabels[post.category] || post.category;
 
   return (
     <Link

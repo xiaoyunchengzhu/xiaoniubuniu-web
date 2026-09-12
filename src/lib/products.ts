@@ -17,6 +17,13 @@ export interface Product {
   screenshots?: string[];
   download_link?: string;
   github_url?: string;
+  cta_label?: string; // 主按钮文案（如 "Download for macOS" / "Join the Closed Beta"）
+  cta_url?: string; // 主按钮链接
+  subline?: string; // 主按钮下方的一句话说明
+  highlights?: string[]; // 价值点小徽章
+  pricing?: "free"; // 用于 Schema offers
+  app_category?: string; // Schema.org applicationCategory
+  license?: string; // SPDX 标识（如 MIT），用于 Schema license
   content: string;
 }
 
@@ -56,6 +63,13 @@ export function getAllProducts(): Product[] {
         screenshots: data.screenshots || undefined,
         download_link: data.download_link || undefined,
         github_url: data.github_url || undefined,
+        cta_label: data.cta_label || undefined,
+        cta_url: data.cta_url || undefined,
+        subline: data.subline || undefined,
+        highlights: data.highlights || undefined,
+        pricing: data.pricing === "free" ? "free" as const : undefined,
+        app_category: data.app_category || undefined,
+        license: data.license || undefined,
         content,
       };
     });
@@ -91,6 +105,13 @@ export function getProductBySlug(slug: string): Product | null {
     screenshots: data.screenshots || undefined,
     download_link: data.download_link || undefined,
     github_url: data.github_url || undefined,
+    cta_label: data.cta_label || undefined,
+    cta_url: data.cta_url || undefined,
+    subline: data.subline || undefined,
+    highlights: data.highlights || undefined,
+    pricing: data.pricing === "free" ? "free" as const : undefined,
+    app_category: data.app_category || undefined,
+    license: data.license || undefined,
     content,
   };
 }

@@ -11,6 +11,19 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { LuApple, LuSmartphone, LuGlobe, LuMonitor, LuLightbulb, LuDownload, LuGithub, LuArrowRight } from "react-icons/lu";
+
+// SPDX 标识 → 标准 License URL
+const licenseUrls: Record<string, string> = {
+  MIT: "https://opensource.org/licenses/MIT",
+  "Apache-2.0": "https://www.apache.org/licenses/LICENSE-2.0",
+};
+
+// 站内链接同标签页，外链新标签页
+function linkTargetProps(href?: string) {
+  const isExternal = !!href && /^https?:\/\//.test(href);
+  return isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
 
 interface ProductDetailPageProps {
   params: { slug: string };
@@ -26,14 +39,21 @@ export function generateMetadata({
 }: ProductDetailPageProps): Metadata {
   const product = getProductBySlug(params.slug);
   if (!product) return { title: "Product Not Found" };
+  // og 图优先产品封面图，回落图标；都没有就不声明图
+  const ogImage = product.image || product.icon;
   return {
     title: product.title,
     description: product.description,
+    alternates: { canonical: `/products/${product.slug}` },
     openGraph: {
       title: product.title,
       description: product.description,
-      type: "article",
+      type: "website",
+      ...(ogImage ? { images: [{ url: ogImage, alt: product.title }] } : {}),
     },
+    twitter: ogImage
+      ? { card: "summary_large_image", title: product.title, description: product.description, images: [ogImage] }
+      : undefined,
   };
 }
 
@@ -44,12 +64,12 @@ const statusColors: Record<string, string> = {
   archived: "bg-gray-100 text-gray-500",
 };
 
-const platformIcons: Record<string, string> = {
-  macOS: "🍎",
-  iOS: "📱",
-  web: "🌐",
-  Android: "🤖",
-  Windows: "🪟",
+const platformIcons: Record<string, React.ReactNode> = {
+  macOS: <LuApple size={14} />,
+  iOS: <LuSmartphone size={14} />,
+  Android: <LuSmartphone size={14} />,
+  web: <LuGlobe size={14} />,
+  Windows: <LuMonitor size={14} />,
 };
 
 export default function ProductDetailPage({
@@ -95,19 +115,61 @@ export default function ProductDetailPage({
     tipsContent = tipsMatch[1].trim();
   }
 
-  const jsonLd = {
+  // 主 CTA：优先 frontmatter 的 cta_url，回落到 link
+  const ctaUrl = product.cta_url || product.link;
+  const ctaLabel = product.cta_label || "Learn more";
+
+  const jsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: product.title,
     description: product.description,
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: platforms?.join(", ") || "macOS",
+    applicationCategory: product.app_category || "UtilitiesApplication",
+    url: `https://www.xiaoniubuniu.com/products/${product.slug}`,
     author: {
       "@type": "Person",
       name: "XiaoNiuBuNiu",
     },
-    url: `https://www.xiaoniubuniu.com/products/${product.slug}`,
+    ...(platforms?.length ? { operatingSystem: platforms.join(", ") } : {}),
+    ...(product.pricing === "free"
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+          },
+        }
+      : {}),
+    ...(product.license && licenseUrls[product.license]
+      ? { license: licenseUrls[product.license] }
+      : {}),
+    ...(product.download_link
+      ? {
+          downloadUrl: `https://www.xiaoniubuniu.com${product.download_link}`,
+        }
+      : {}),
+    ...(product.icon
+      ? { image: `https://www.xiaoniubuniu.com${product.icon}` }
+      : {}),
   };
+
+  // FAQPage 结构化数据（有 FAQ 时输出，方便搜索引擎展示）
+  const faqJsonLd =
+    faqItems.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqItems.map((faq) => ({
+            "@type": "Question",
+            name: faq.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              // 去掉 Markdown 链接语法，只留纯文本
+              text: faq.a.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1"),
+            },
+          })),
+        }
+      : null;
 
   return (
     <div>
@@ -115,6 +177,12 @@ export default function ProductDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       {/* ===== Hero ===== */}
       <section className="max-w-2xl mx-auto px-4 pt-16 pb-8 text-center">
@@ -141,36 +209,40 @@ export default function ProductDetailPage({
         <p className="text-lg text-gray-500 mb-2">{product.description}</p>
 
         {/* Platform + Status */}
-        <div className="flex items-center justify-center gap-2 mb-6 text-sm text-gray-400">
+        <div className="flex items-center justify-center gap-3 mb-6 text-sm text-gray-400">
           {platforms?.map((p) => (
-            <span key={p}>
-              {platformIcons[p] || ""} {p}
+            <span key={p} className="inline-flex items-center gap-1">
+              {platformIcons[p] || null}
+              {p}
             </span>
           ))}
-          {platforms && platforms.length > 1 && <span>·</span>}
           <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColor}`}>
             {statusLabel}
           </span>
         </div>
 
-        {/* Download CTA */}
+        {/* 主 CTA（文案与链接均来自产品 frontmatter） */}
         <div className="flex flex-wrap items-center justify-center gap-3">
-          {product.link && (
+          {ctaUrl && (
             <a
-              href={product.link}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={ctaUrl}
+              {...linkTargetProps(ctaUrl)}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-orange text-white font-semibold hover:bg-brand-orange-dark transition-colors shadow-lg shadow-orange-200"
             >
-              Download for macOS →
+              {ctaUrl === product.download_link ? (
+                <LuDownload size={16} />
+              ) : (
+                <LuArrowRight size={16} />
+              )}
+              {ctaLabel}
             </a>
           )}
-          {product.download_link && (
+          {product.download_link && product.download_link !== ctaUrl && (
             <a
               href={product.download_link}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-300 text-gray-700 font-medium hover:border-gray-400 transition-colors"
             >
-              Direct Download
+              <LuDownload size={16} /> Direct Download
             </a>
           )}
           {product.github_url && (
@@ -180,25 +252,29 @@ export default function ProductDetailPage({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-300 text-gray-700 font-medium hover:border-gray-400 transition-colors"
             >
-              GitHub →
+              <LuGithub size={16} /> GitHub
             </a>
           )}
         </div>
-        <p className="text-xs text-gray-400 mt-3 mb-4">
-          Free · Open Source · macOS 14+ · No account needed
-        </p>
+        {product.subline && (
+          <p className="text-xs text-gray-400 mt-3 mb-4">{product.subline}</p>
+        )}
         {/* Value-in-5-seconds */}
-        <div className="flex flex-wrap justify-center gap-3 text-sm text-gray-600">
-          <span className="px-3 py-1 bg-gray-50 rounded-full">No shortcut</span>
-          <span className="px-3 py-1 bg-gray-50 rounded-full">No window</span>
-          <span className="px-3 py-1 bg-gray-50 rounded-full">No setup</span>
-        </div>
+        {product.highlights && product.highlights.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-3 text-sm text-gray-600 mt-4">
+            {product.highlights.map((h) => (
+              <span key={h} className="px-3 py-1 bg-gray-50 rounded-full">
+                {h}
+              </span>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ===== Screenshots ===== */}
       {(product.screenshots?.length ?? 0) > 0 && (
         <section className="max-w-4xl mx-auto px-4 py-12">
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {product.screenshots!.map((src, i) => (
               <div
                 key={i}
@@ -222,6 +298,14 @@ export default function ProductDetailPage({
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
+              // 表格套横向滚动容器，防止窄屏（手机）把整页撑出横向滚动
+              table({ children }) {
+                return (
+                  <div className="w-full overflow-x-auto my-[1em]">
+                    <table style={{ margin: 0 }}>{children}</table>
+                  </div>
+                );
+              },
               code({ className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || "");
                 const codeString = String(children).replace(/\n$/, "");
@@ -254,12 +338,7 @@ export default function ProductDetailPage({
               },
               a({ children, href, ...props }) {
                 return (
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    {...props}
-                  >
+                  <a href={href} {...linkTargetProps(href)} {...props}>
                     {children}
                   </a>
                 );
@@ -275,15 +354,15 @@ export default function ProductDetailPage({
       {tipsContent && (
         <section className="max-w-[720px] mx-auto px-4 py-8">
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-            <h3 className="text-sm font-semibold text-blue-800 mb-2">
-              💡 Tips
+            <h3 className="text-sm font-semibold text-blue-800 mb-2 flex items-center gap-1.5">
+              <LuLightbulb size={15} /> Tips
             </h3>
             <div className="text-sm text-blue-700 prose-blue prose-sm">
               <ReactMarkdown
                 components={{
                   a({ children, href, ...props }) {
                     return (
-                      <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                      <a href={href} {...linkTargetProps(href)} {...props}>
                         {children}
                       </a>
                     );
@@ -315,7 +394,7 @@ export default function ProductDetailPage({
                     components={{
                       a({ children, href, ...props }) {
                         return (
-                          <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                          <a href={href} {...linkTargetProps(href)} {...props}>
                             {children}
                           </a>
                         );
@@ -337,16 +416,25 @@ export default function ProductDetailPage({
           <h3 className="text-lg font-bold text-gray-900 text-center mb-6">
             You Might Also Like
           </h3>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {relatedProducts.map((rp) => (
               <Link
                 key={rp.slug}
                 href={`/products/${rp.slug}`}
                 className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all"
               >
-                <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-lg font-bold text-gray-500 flex-shrink-0">
-                  {rp.title.charAt(0)}
-                </div>
+                {rp.icon ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={rp.icon}
+                    alt=""
+                    className="w-10 h-10 rounded-lg border border-gray-100 flex-shrink-0"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-lg font-bold text-gray-500 flex-shrink-0">
+                    {rp.title.charAt(0)}
+                  </div>
+                )}
                 <div className="min-w-0">
                   <p className="text-sm font-medium text-gray-900 truncate">
                     {rp.title}
@@ -363,21 +451,29 @@ export default function ProductDetailPage({
 
       {/* ===== Footer CTA ===== */}
       <section className="text-center py-12 px-4">
-        <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-gray-100 flex items-center justify-center text-xl">
-          {product.title.charAt(0)}
-        </div>
+        {product.icon ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={product.icon}
+            alt={`${product.title} icon`}
+            className="w-12 h-12 mx-auto mb-4 rounded-xl border border-gray-100"
+          />
+        ) : (
+          <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-gray-100 flex items-center justify-center text-xl">
+            {product.title.charAt(0)}
+          </div>
+        )}
         <p className="text-lg font-bold text-gray-900 mb-1">
           {product.title}
         </p>
         <p className="text-sm text-gray-500 mb-4">{product.description}</p>
-        {product.link && (
+        {ctaUrl && (
           <a
-            href={product.link}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={ctaUrl}
+            {...linkTargetProps(ctaUrl)}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-orange text-white font-medium hover:bg-brand-orange-dark transition-colors"
           >
-            Download →
+            {ctaLabel}
           </a>
         )}
       </section>

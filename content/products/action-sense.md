@@ -4,15 +4,23 @@ date: "2026-07-15"
 status: "released"
 category: "macOS"
 icon: "/images/products/purepaste/icon_256.png"
+image: "/images/products/action-sense/cover.png"
 platforms: ["macOS"]
 tags: ["macOS", "SwiftUI", "clipboard", "productivity", "open source"]
 description: "What you copy, instantly actionable. Copy a URL → open it. Copy a color → preview it. Copy math → calculate it. All at your cursor, no window needed. Native, local, open source."
 link: "https://github.com/xiaoyunchengzhu/ActionSense"
 download_link: "/downloads/ActionSense_2.0.dmg"
 github_url: "https://github.com/xiaoyunchengzhu/ActionSense"
+cta_label: "Download for macOS"
+cta_url: "/downloads/ActionSense_2.0.dmg"
+subline: "Free · Open Source (MIT) · macOS 14+ · No account needed"
+highlights: ["No shortcut", "No window", "No setup"]
+pricing: "free"
+app_category: "UtilitiesApplication"
+license: "MIT"
 screenshots:
-  - "https://www.xiaoniubuniu.com/images/products/purepaste/menubar.png"
-  - "https://www.xiaoniubuniu.com/images/products/purepaste/url-detect.png"
+  - "/images/products/purepaste/menubar.png"
+  - "/images/products/purepaste/url-detect.png"
 ---
 
 ## What You Copy, Instantly Actionable
@@ -23,7 +31,7 @@ ActionSense removes that step. It detects what you copied and puts the right act
 
 **Copy → action appears at your cursor → Enter to trigger.**
 
-![PasteFlow Demo](https://www.xiaoniubuniu.com/images/products/purepaste/menubar.png)
+![PasteFlow Demo](/images/products/purepaste/menubar.png)
 
 ## What It Detects
 
@@ -53,6 +61,8 @@ Plus plain text mode: auto-strips formatting when you just want clean paste.
 
 **ActionSense is the only tool that brings the action to your cursor.** Everything else requires you to go find the tool.
 
+Built with SwiftUI + AppKit. 17 Swift source files. Zero third-party dependencies. All processing local — no data leaves your Mac.
+
 ## Who Uses It
 
 **Developers** — Copy a GitHub URL → open it. Copy JSON → format it. Copy an error message → diagnose it (coming in Pro). Zero keystrokes between copy and action.
@@ -73,7 +83,7 @@ Clipboard history tells you *what* you copied. ActionSense tells you *what you d
 
 Filter by type, mode, or keyword. Up to 5,000 entries. Stored locally.
 
-![Intent History](https://www.xiaoniubuniu.com/images/products/purepaste/history.png)
+![Intent History](/images/products/purepaste/history.png)
 
 ## Zero Dependencies, Zero Data Collection
 

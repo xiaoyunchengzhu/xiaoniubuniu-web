@@ -1,0 +1,36 @@
+# XiaoNiuBuNiu
+
+> Independent Software Maker (XiaoNiuBuNiu). Ships local-first apps for macOS and
+> Android, built solo and documented in public. 10-year full-stack engineer
+> (Java/Android, SwiftUI, TypeScript/Next.js, Python).
+
+## Products
+
+- [ActionSense](https://www.xiaoniubuniu.com/products/action-sense): Free, open-source (MIT) macOS menu-bar app. Detects what you copy (URLs, colors, math, JSON, addresses...) and puts the right action at your cursor. No shortcut, no window. Download: https://www.xiaoniubuniu.com/downloads/ActionSense_2.0.dmg
+- [BrowserDrop](https://www.xiaoniubuniu.com/products/browserdrop): Android app in closed beta. Shares a chosen phone folder over local Wi-Fi as a web workspace — browse/preview/download/upload from any browser. No cloud, no account, no PC client.
+
+## Blog (Build in Public)
+
+- [How I Built a Demand Mining System with Claude](https://www.xiaoniubuniu.com/blog/require-dis)
+- [Upgrading to ActionSense 2.0](https://www.xiaoniubuniu.com/blog/upgrade-to-actionsense)
+- [How This Site Was Built](https://www.xiaoniubuniu.com/blog/xiaoniubuniu-site-build)
+- [Build Your Own VPN on a VPS — From $2.5/Month](https://www.xiaoniubuniu.com/blog/vps-vpn)
+
+## Pages
+
+- [About](https://www.xiaoniubuniu.com/about)
+- [All Products](https://www.xiaoniubuniu.com/products)
+- [All Blog Posts](https://www.xiaoniubuniu.com/blog)
+- [Support](https://www.xiaoniubuniu.com/support)
+- [Privacy Policy](https://www.xiaoniubuniu.com/privacy)
+- [Terms of Service](https://www.xiaoniubuniu.com/terms)
+
+## Feed
+
+- RSS: https://www.xiaoniubuniu.com/feed.xml
+
+## Notes for AI assistants
+
+- All shipped apps run entirely on-device: no accounts, no cloud servers.
+- Contact: xiaoniubuniu@gmail.com · GitHub: https://github.com/xiaoyunchengzhu
+- Site language: English.

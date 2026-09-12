@@ -1,224 +1,224 @@
 ---
-title: "独立开发者找不到产品方向？我用 Claude 大模型建了个需求挖掘系统，7 天找到 3 个高价值机会"
+title: "How I Built a Demand Mining System with Claude to Find Product Ideas"
 date: "2026-07-07"
+image: "/images/blog/require-dis.png"
 category: "build-in-public"
-tags: ["Claude Code", "需求挖掘", "AI工具", "独立开发", "产品方向", "SaaS创业"]
-description: "做了两个月独立开发一个产品都没做出来——问题不是没想法，是判断能力不够。我用 Claude Code 的 Skill 机制搭了一套自动化需求挖掘流程，从 Reddit、HN、Product Hunt 抓取吐槽，五维度打分排序，第一次实战就找到 3 个 7 分以上的高价值方向。"
+tags: ["Claude Code", "demand mining", "AI tools", "indie dev", "product direction", "SaaS"]
+description: "Two months of indie dev, zero products built. The problem wasn't a lack of ideas — it was my inability to evaluate them. I used Claude Code's Skill mechanism to build an automated demand mining pipeline that scans Reddit, HN, and Product Hunt, scores opportunities across 5 dimensions, and found 3 high-value directions in the first real run."
 ---
-## 问题：两个月，一个产品都没做出来
+## The problem: two months, zero products shipped
 
-决定做独立开发。第一个问题：做什么？
+I decided to become an indie developer. First question: what should I build?
 
-> 如果你也在找产品方向，这篇文章可能帮你省掉那两个月。
+> If you're also searching for a product direction, this post might save you those two months.
 
-两个月里，我的日常是这样的：
+For two months, my daily routine looked like this:
 
-1. 刷 Reddit 的 r/SaaS 和 r/startups，找吐槽帖
-2. 逛 Product Hunt 看产品排名，翻评论区
-3. 翻 App Store 的 2-4 星评价
-4. 去 X 上关注独立开发者讨论的热门方向
+1. Scrolling r/SaaS and r/startups on Reddit, hunting for complaint threads
+2. Browsing Product Hunt rankings and comment sections
+3. Reading 2–4 star App Store reviews
+4. Following indie dev discussions on X to spot hot directions
 
-每次都一样——发现一个需求，兴奋一晚上，第二天醒来开始自我否定：
+Every time, same pattern — I'd find a need, get excited all night, then wake up the next morning and start talking myself out of it:
 
-- "但 Google Sheets 也能解决啊"
-- "但大厂做一个一样的怎么办"
-- "但加拿大才 4000 万人口，市场太小了"
+- "But Google Sheets can solve that too"
+- "What if a big company just builds the same thing"
+- "Canada only has 40 million people, the market is too small"
 
-**两个月，zero progress。**
+**Two months, zero progress.**
 
-我后来复盘这个过程，发现了真正的问题。
-
-我后来复盘这个过程，发现了真正的问题。
+Later I reviewed the process and found the real problem.
 
 ---
 
-## 真正的问题：判断材料不够
+## The real problem: not enough input to judge on
 
-我用来判断"这个需求值不值得做"的全部知识，来自我自己的大脑。
+Everything I used to decide "is this worth building" came from my own head.
 
-一个做了几年全栈开发、在市场判断上基本为零的大脑。
+A head that had done full-stack development for a few years and had essentially zero market judgment.
 
-我不知道全球有多少自由职业者。我不知道加拿大理财市场的规模。我不知道历史上类似产品是怎么成功的。
+I didn't know how many freelancers there are worldwide. I didn't know the size of the Canadian personal finance market. I didn't know how similar products had succeeded in the past.
 
-**我连判断的素材都没有，就在做判断。**
+**I was making judgments without even having the material to judge on.**
 
-更危险的是，我总能把"我不知道"伪装成"我觉得不行"。朋友说他看到了一个跨境支付的巨大需求，我第一反应是"Stripe 不是已经做了吗"——但我其实连 Stripe 的确切定价都不知道。
+Worse, I could always disguise "I don't know" as "I don't think so." A friend mentioned seeing huge demand for cross-border payments, and my first reaction was "doesn't Stripe already do that?" — when in fact I didn't even know Stripe's exact pricing.
 
-这就像一个从没出过村的人，在对着世界地图说：这里不值得去，那里也不值得去。
-
----
-
-## 换个思路
-
-如果我的判断不可靠，谁的行？
-
-投资人？一年看几千个项目，失败率还是很高。成功创业者？经验高度依赖具体的时间和场景，很难复制。
-
-然后我意识到一件事：**GPT-4 和 Claude 这类大模型，读过的商业案例、市场报告、用户反馈，比我多好几个数量级。**
-
-Claude 的训练数据里，可能包含所有 YC 投资公司的公开分析、被广泛引用的市场研究报告、无数 Reddit 和 HN 上关于产品的讨论。它的"知识广度"超过任何一个人类专家。
-
-那为什么不直接让它来做判断？
+It's like someone who has never left their village, pointing at a world map and saying: not worth going here, not worth going there either.
 
 ---
 
-## 我做了什么
+## A different angle
 
-基于 Claude Code 的 Skill 机制，我建了一个叫 `demand-mining` 的流程。它不是一个独立应用，而是一个 Markdown 格式的流程定义文件——大约 200 行，定义了从信号采集到机会排序的完整逻辑。
+If my judgment is unreliable, whose is good enough?
 
-Claude Code 的 Skill 文件放在项目 `.claude/skills/<name>/SKILL.md` 路径下，调用 `/demand-mining` 即可运行。
+Investors? They look at thousands of deals a year and still have a high failure rate. Successful founders? Their experience is tightly bound to a specific time and context, nearly impossible to copy.
 
-完整流程分 6 个阶段：
+Then it hit me: **large models like GPT-4 and Claude have read orders of magnitude more business cases, market reports, and user feedback than I have.**
 
-### Phase 1：确定方向
+Claude's training data likely includes public analyses of every YC-backed company, widely cited market research reports, and countless Reddit and HN product discussions. Its "breadth of knowledge" exceeds any single human expert.
 
-输入一个领域（如"金融工具类网站"），或者不输入任何方向，让系统从 Reddit、HN、Product Hunt 等源头自动扫描当前的热门讨论。
+So why not let it make the calls?
 
-### Phase 2：多源信号采集
+---
 
-调用 WebSearch 和 WebFetch 工具，从以下来源抓取原始数据：
+## What I built
 
-- **Reddit**：r/SaaS, r/startups, r/selfhosted, r/productivity 的吐槽帖
-- **Hacker News**：Ask HN 和 Show HN 中关于痛点的讨论
-- **应用商店**：2-4 星评论（最可能包含具体、理性的痛点描述）
-- **Product Hunt**：高票产品的评论区差评和改进建议
-- **X / Twitter**：搜索 "I wish there was..." 类表达
+Using Claude Code's Skill mechanism, I built a pipeline called `demand-mining`. It's not a standalone app — it's a Markdown process definition file, roughly 200 lines, describing the full logic from signal collection to opportunity ranking.
 
-每条原始信号必须记录来源 URL、原文关键段落（保留原话）、信号类型。
+Claude Code Skill files live at `.claude/skills/<name>/SKILL.md` in a project; invoking `/demand-mining` runs it.
 
-### Phase 3：提取需求信号
+The full pipeline has 6 phases:
 
-从吐槽中提取结构化信息：谁在痛？有多痛？现在怎么解决的？是否表达过付费意愿？
+### Phase 1: Pick a direction
 
-关键规则：**只保留有具体场景的痛点。** "这软件不好用"这类模糊评价直接丢弃。
+Input a domain (e.g. "financial tools websites"), or input nothing and let the system auto-scan current hot discussions from sources like Reddit, HN, and Product Hunt.
 
-### Phase 4：五维度评分（核心）
+### Phase 2: Multi-source signal collection
 
-这是整个系统最关键的一步。对每个需求信号，从 5 个维度打分（1-10），**每个分数必须附带具体依据**。
+Call the WebSearch and WebFetch tools to pull raw data from:
 
-| 维度 | 权重 | 说明 |
+- **Reddit**: complaint threads in r/SaaS, r/startups, r/selfhosted, r/productivity
+- **Hacker News**: Ask HN and Show HN threads about pain points
+- **App stores**: 2–4 star reviews (most likely to contain specific, rational pain descriptions)
+- **Product Hunt**: negative comments and improvement suggestions on highly upvoted products
+- **X / Twitter**: search for "I wish there was..." style expressions
+
+Every raw signal must record its source URL, key quotes (verbatim), and signal type.
+
+### Phase 3: Extract demand signals
+
+Pull structured info out of the complaints: who is in pain? How bad is it? How do they solve it today? Have they expressed willingness to pay?
+
+Key rule: **only keep pain points with concrete scenarios.** Vague comments like "this software sucks" get discarded.
+
+### Phase 4: Five-dimension scoring (the core)
+
+This is the most important step in the whole system. Each demand signal is scored on 5 dimensions (1–10), and **every score must come with concrete evidence**.
+
+| Dimension | Weight | What it measures |
 |------|------|------|
-| 痛点强度 | 25% | 用户语言的情绪强烈程度、是否每天受影响、是否表达付费意愿 |
-| 市场规模 | 25% | 受影响人群的全球规模估算（依赖模型知识，必须给出估算逻辑） |
-| 竞争格局 | 20% | 竞品的数量、质量、用户评分——必须有具体竞品名称和数据 |
-| 技术可行性 | 15% | 技术栈难度、所需资源、是否有开源方案可借鉴 |
-| 商业化清晰度 | 15% | 对标竞品定价、用户付费意愿、是否属于刚需支出 |
+| Pain intensity | 25% | Emotional strength of user language, daily impact, expressed willingness to pay |
+| Market size | 25% | Global population estimate of affected users (relies on model knowledge; estimation logic must be shown) |
+| Competitive landscape | 20% | Number and quality of competitors, their user ratings — must name specific competitors with data |
+| Technical feasibility | 15% | Stack difficulty, resources needed, existing open-source references |
+| Monetization clarity | 15% | Comparable competitor pricing, payment willingness, whether it's a must-pay expense |
 
-综合分 = 加权求和。
+Total score = weighted sum.
 
-**最重要的一条约束：评分阶段完全由模型基于自身知识完成，禁止询问用户意见。** 这保证了评分不受我自己的认知偏差干扰。
+**The most important constraint: scoring is done entirely by the model from its own knowledge — asking the user for opinions is forbidden.** This keeps my own cognitive bias out of the scoring.
 
-### Phase 5：过滤与排序
+### Phase 5: Filter and rank
 
-综合分低于 4.5 的直接淘汰。本质上相同的需求合并。剩余按分数降序排列，分为三档：
+Anything below 4.5 is eliminated outright. Essentially identical needs are merged. The rest are sorted descending into three tiers:
 
-- 🔥 高优先（≥ 7.5）
-- ✅ 值得关注（6.0–7.4）
-- ⚠️ 待观察（4.5–5.9）
+- 🔥 High priority (≥ 7.5)
+- ✅ Worth watching (6.0–7.4)
+- ⚠️ On radar (4.5–5.9)
 
-### Phase 6：深度分析
+### Phase 6: Deep analysis
 
-对 Top 3 的需求，做以下维度的深入剖析：
+For the top 3 demands, dig into:
 
-1. 为什么这个需求一直没有被解决？（技术壁垒？市场太小？用户付费意愿低？）
-2. 历史上有类似的成功案例吗？
-3. MVP 应该长什么样？核心验证假设是什么？
-4. 风险清单：技术、市场、竞争、平台风险
-5. 模型对自身判断的信心度（高/中/低）及原因
-
----
-
-## 第一次实战：分析"金融工具"方向
-
-我让系统分析"金融工具类网站"这个方向。
-
-它搜索了约 15 个关键词组合，从 Reddit、HN、Product Hunt、Trustpilot、应用商店评论等 20+ 个来源中提取了 8 个需求信号，然后逐一打分排序。
-
-**排名前 3 的是：**
-
-**#1 自由职业者实时税务估算 — 7.50 分**
-
-美国有 6400 万自由职业者（Upwork 2024 数据），每季度都要估算税款并预留资金。算少了面临 IRS 罚款（2025 年欠缴利率 8%），算多了占用现金流。QuickBooks Self-Employed 曾经是唯一专做这个的工具，但 Intuit 在 2024 年关闭了它，留出了数十万付费用户的空白。
-
-**#2 自由职业者一体化财务工具 — 7.15 分**
-
-发票、记账、税务估算、客户管理——自由职业者目前用 3-5 个工具拼凑，数据不互通。QuickBooks 功能太多太贵（$30+/月），Wave 免费版不断缩水，FreshBooks 有信任问题。
-
-**#3 非美国市场理财工具 — 7.10 分**
-
-Monarch Money 在 Trustpilot 上被加拿大用户打了 2.3 分——"在加拿大完全没用"。主流个人理财 App 几乎全部只支持美国银行，加拿大、英国、澳大利亚、新加坡的用户被系统性地忽视。
+1. Why has this need gone unsolved? (Technical barrier? Market too small? Low payment willingness?)
+2. Are there historical success cases similar to this?
+3. What should the MVP look like? What's the core assumption to validate?
+4. Risk list: technical, market, competitive, platform risks
+5. The model's own confidence in its judgment (high/medium/low) and why
 
 ---
 
-这三个方向，放在之前，我一个都不会认真考虑。
+## First real run: the "financial tools" direction
 
-"税务估算？太无聊了吧。""非美国市场？我又不了解。"——这就是我的直觉在工作。而实际数据显示，这些方向恰恰是需求最强烈、竞争最少、市场最大的。
+I had the system analyze the "financial tools websites" direction.
 
-**我的直觉，在每一个高评分机会上都错了。**
+It searched about 15 keyword combinations, extracted 8 demand signals from 20+ sources including Reddit, HN, Product Hunt, Trustpilot, and app store reviews, then scored and ranked each one.
 
----
+**The top 3:**
 
-## 关键设计决策
+**#1 Real-time tax estimation for freelancers — 7.50**
 
-### 1. "禁止询问用户意见"是系统生效的前提
+The US has 64 million freelancers (Upwork 2024 data), all estimating quarterly taxes and setting money aside. Underestimate and you face IRS penalties (8% underpayment rate in 2025); overestimate and you tie up cash flow. QuickBooks Self-Employed used to be the only purpose-built tool, but Intuit shut it down in 2024, leaving hundreds of thousands of paying users stranded.
 
-如果允许用户在评分阶段介入——"我觉得这个方向不错，把分调高一点吧"——认知偏差就会重新进入系统。技术可行性 9 分的"AI 财务助手"听起来很酷，但它的市场规模只有 5 分、商业化只有 4 分。如果让我来调分，它会冲到第一。
+**#2 All-in-one finance tool for freelancers — 7.15**
 
-### 2. "必须写依据"比打分本身更重要
+Invoicing, bookkeeping, tax estimation, client management — freelancers currently stitch together 3–5 tools with no data flowing between them. QuickBooks is bloated and expensive ($30+/month), Wave's free tier keeps shrinking, FreshBooks has trust issues.
 
-早期版本我给模型的指令是"请打分"，模型会给 7 分、8 分，但没有理由。改成"每个分数必须写出依据：数据来源、估算逻辑、推理过程"之后，评分质量和可验证性显著提升。7 分是"因为全球 X 万从业者"还是"因为感觉市场不小"——差别巨大。
+**#3 Personal finance tools for non-US markets — 7.10**
 
-### 3. 加权 vs 等权重
-
-用等权重跑了一次对比实验。结果"听起来很酷的 AI 方向"因为有技术新颖性加分而排到了第一，但它的市场规模和商业化路径都有很大不确定性。加权把"痛点 + 市场"提到 50%，让"确定性强但无聊"的需求排到前面。对独立开发者来说，确定性比新颖性更重要。
-
-### 4. 信号源的多样性决定报告质量
-
-第一版只用 Reddit。结果讨论高度偏向技术人群，报告里全是"开发工具""效率工具"，忽略了普通用户的需求。后来扩展到应用商店评论、Trustpilot 差评，信号多样性明显提升。根据目标用户调整信号源，比盲目增加来源数量更有效。
+Monarch Money was rated 2.3 by Canadian users on Trustpilot — "completely useless in Canada." Mainstream personal finance apps almost universally support only US banks; users in Canada, the UK, Australia, and Singapore are systematically ignored.
 
 ---
 
-## 这个系统的局限
+Before this system, I would not have seriously considered any of these three directions.
 
-如实说。
+"Tax estimation? Too boring." "Non-US markets? I don't know them." — that was my instinct at work. The actual data says these are precisely the directions with the strongest demand, the least competition, and the largest markets.
 
-**1. 模型知识有时效性问题。** Claude 的训练数据截止日期意味着它对最新市场变化（比如某竞品刚融了多少钱、某产品刚上线）可能不知情。报告需要结合实时搜索验证。
-
-**2. 评分存在"近因偏好"。** 跑了几次后发现模型倾向于给技术性强的方向打高分。这可能反映了 Reddit 和 HN 的讨论以技术话题为主导致的训练数据偏差。对大模型来说，"税务软件"天然不如"AI 工具"性感。
-
-**3. 市场规模的数据可能不准确。** 模型引用的市场规模数据来自训练语料，可能包含过时的、估算错误的、甚至互相矛盾的信息。评分依据里的数字应该被视作"初步估算"而非事实。
-
-**4. 这不能替代真正的用户调研。** 报告给出的是方向级别的判断。具体到执行层面，你仍然需要去和目标用户聊、做落地页测试、跑 MVP 实验。这个系统取代的是"我该选哪个方向"，不是"怎么做出好产品"。
+**My instinct was wrong on every high-scoring opportunity.**
 
 ---
 
-## 2026-07-07 更新
+## Key design decisions
 
-Skill 在持续迭代中。当前版本已有一次实际运行（金融工具方向），产出了一份完整的分析报告。后续计划：
+### 1. "No asking the user" is the precondition for the system working
 
-- 增加领域定制能力（B2B SaaS vs 消费 App 的评分逻辑
-不同）
-- 引入"趋势维度"（AI 相关的需求是否在快速增长？）
-- 积累案例后校准模型打分尺度
+If users could intervene during scoring — "I like this one, bump the score up" — cognitive bias re-enters the system. An "AI financial assistant" scoring 9 on technical feasibility sounds cool, but its market size is a 5 and monetization a 4. If I were allowed to adjust scores, it would jump to #1.
 
----
+### 2. "Evidence required" matters more than the score itself
 
-## 关于对错
+In early versions my instruction was just "please score this," and the model would hand out 7s and 8s with no reasoning. After changing it to "every score must state its evidence: data sources, estimation logic, reasoning," both the quality and the verifiability of the scores improved dramatically. A 7 because "there are X million practitioners worldwide" versus a 7 because "the market feels big" — night and day.
 
-写完这篇文章，我需要澄清一件事：
+### 3. Weighted vs equal weights
 
-我不是在说"这个系统找到了正确答案"。评分可能有偏差，模型知识也可能有过时的地方。
+I ran a comparison with equal weights. The result: "cool-sounding AI directions" shot to #1 on novelty points, despite big uncertainty in market size and monetization. Weighting pushes "pain + market" to 50%, letting "certain but boring" demands rise to the top. For an indie developer, certainty beats novelty.
 
-我想说的是：**在没有这个流程之前，我的判断来源是不可靠的直觉。有了之后，我的判断来源变成了结构化的、可追溯的、可修正的数据分析。**
+### 4. Source diversity determines report quality
 
-即使分析错了，我也可以回头看具体是哪个维度的评分出了问题，然后修正。而直觉判断错了，你连"错在哪"都不知道。
-
-**可修正的错误，比固执的正确更有价值。**
+Version one used Reddit only. The output skewed heavily toward a technical audience — all "dev tools" and "productivity tools," ignoring regular users' needs. Expanding to app store reviews and Trustpilot complaints clearly improved signal diversity. Tailoring sources to your target users beats blindly adding more of them.
 
 ---
 
+## The limits of this system
+
+In fairness.
+
+**1. Model knowledge goes stale.** Claude's training cutoff means it may not know the latest market changes (a competitor's fresh funding round, a product that just launched). Reports need verification against live search.
+
+**2. Scoring has a recency/tech bias.** After several runs, the model tends to score technically sophisticated directions higher. This likely reflects training data bias, since Reddit and HN discussions skew technical. To a large model, "tax software" is inherently less sexy than "AI tools."
+
+**3. Market-size numbers may be wrong.** The figures the model cites come from training corpora — some outdated, some misestimated, some contradictory. Treat the numbers in the evidence as "initial estimates," not facts.
+
+**4. This is not a replacement for real user research.** The report gives direction-level judgment. At the execution level you still need to talk to target users, run landing page tests, and ship MVP experiments. This system replaces "which direction should I pick," not "how do I build a good product."
+
 ---
 
-> **相关阅读**：[我用 Claude Code + Next.js 搭了个个人网站，从想法到上线只用了半天](/blog/xiaoniubuniu-site-build) —— 这个需求挖掘系统就是基于 Claude Code 的 Skill 机制开发的，同样的工具，不同的用法。
+## Update 2026-07-07
 
-*如果你也在找产品方向，或者对评分维度有更好的想法，欢迎在项目 [GitHub](https://github.com/xiaoyunchengzhu/require-dis) 讨论。*
+The Skill is still iterating. The current version has had one real run (financial tools direction), producing a full analysis report. Next steps:
+
+- Add domain customization (scoring logic should differ for B2B SaaS vs consumer apps)
+- Introduce a "trend dimension" (are AI-related demands growing fast?)
+- Calibrate the model's scoring scale as more cases accumulate
+
+---
+
+## On being right or wrong
+
+After writing this, one clarification:
+
+I'm not saying "this system found the right answers." The scoring may be biased, and model knowledge may be outdated.
+
+What I am saying: **before this pipeline, my judgments came from unreliable instinct. After it, they come from structured, traceable, correctable data analysis.**
+
+Even when the analysis is wrong, I can look back, find which dimension's score was off, and fix it. When an instinctive judgment is wrong, you don't even know *what* was wrong.
+
+**A correctable error is worth more than a stubborn certainty.**
+
+---
+
+> **Related reading**: [How I Built My Personal Site in Half a Day with Claude Code + Next.js + Cloudflare Pages](/blog/xiaoniubuniu-site-build) — this demand mining system was built on the same Claude Code Skill mechanism. Same tool, completely different use.
+
+*If you're also hunting for a product direction, or have better ideas for the scoring dimensions, join the discussion on the project's [GitHub](https://github.com/xiaoyunchengzhu/require-dis).*
+
+---
+
+*This article was drafted with Claude Code assistance based on my first-hand experience building the demand mining Skill. All screenshots, methodology, and analysis are from my own work.*

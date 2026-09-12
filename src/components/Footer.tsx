@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { FaGithub, FaTwitter, FaWeixin } from "react-icons/fa";
-import { SiZhihu } from "react-icons/si";
+import { LuRss } from "react-icons/lu";
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Copyright */}
           <p className="text-sm text-gray-500">
-            © {new Date().getFullYear()} 小牛不牛 / XiaoNiuBuNiu &mdash; Indie Mac &amp; iOS App Developer
+            © {new Date().getFullYear()} XiaoNiuBuNiu &mdash; Independent Software Maker
           </p>
           <p className="text-xs text-gray-400">
             Built with Next.js &amp; Cloudflare
@@ -35,22 +36,35 @@ export default function Footer() {
               <FaTwitter size={20} />
             </a>
             <a
-              href="https://www.zhihu.com/people/zhang-shi-yu-5-24"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/feed.xml"
               className="text-gray-400 hover:text-gray-600 transition-colors"
-              aria-label="知乎"
+              aria-label="RSS feed"
             >
-              <SiZhihu size={20} />
+              <LuRss size={20} />
             </a>
             <span
               className="text-gray-400 cursor-default"
-              title="微信号：xiaoyunchenegzhu"
-              aria-label="微信"
+              title="WeChat: xiaoyunchengzhu"
+              aria-label="WeChat"
             >
               <FaWeixin size={20} />
             </span>
           </div>
+        </div>
+
+        {/* 次级页面链接 */}
+        <div className="flex items-center justify-center gap-4 mt-6 text-xs text-gray-400">
+          <Link href="/support" className="hover:text-gray-600 transition-colors">
+            Support
+          </Link>
+          <span aria-hidden="true">·</span>
+          <Link href="/privacy" className="hover:text-gray-600 transition-colors">
+            Privacy Policy
+          </Link>
+          <span aria-hidden="true">·</span>
+          <Link href="/terms" className="hover:text-gray-600 transition-colors">
+            Terms of Service
+          </Link>
         </div>
       </div>
     </footer>
