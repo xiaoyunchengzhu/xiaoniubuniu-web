@@ -7,7 +7,7 @@
 ## Products
 
 - [ActionSense](https://www.xiaoniubuniu.com/products/action-sense): Free, open-source (MIT) macOS menu-bar app. Detects what you copy (URLs, colors, math, JSON, addresses...) and puts the right action at your cursor. No shortcut, no window. Download: https://www.xiaoniubuniu.com/downloads/ActionSense_2.0.dmg
-- [BrowserDrop](https://www.xiaoniubuniu.com/products/browserdrop): Android app in closed beta. Shares a chosen phone folder over local Wi-Fi as a web workspace — browse/preview/download/upload from any browser. No cloud, no account, no PC client.
+- [BrowserDrop](https://www.xiaoniubuniu.com/products/browserdrop): Android app, live on Google Play. Shares a chosen phone folder over local Wi-Fi as a web workspace — browse/preview/download/upload from any browser. No cloud, no account, no PC client. Install: https://play.google.com/store/apps/details?id=com.xiaoniubuniu.browserdrop
 
 ## Blog (Build in Public)
 

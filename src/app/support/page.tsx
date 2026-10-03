@@ -35,19 +35,19 @@ const productSupport = [
     name: "BrowserDrop",
     platform: "Android",
     intro:
-      "Local Wi-Fi file sharing, currently in closed beta on Google Play.",
+      "Local Wi-Fi file sharing, live on Google Play.",
     channels: [
       {
-        label: "Beta feedback & issues",
+        label: "Feedback & issues",
         desc: `Email me directly — mention "BrowserDrop" and your device model.`,
-        href: `mailto:${CONTACT_EMAIL}?subject=BrowserDrop%20beta%20feedback`,
+        href: `mailto:${CONTACT_EMAIL}?subject=BrowserDrop%20feedback`,
         external: false,
       },
       {
-        label: "Join the beta",
-        desc: "Opt-in instructions, group link, and Play Store links live on the product page.",
-        href: "/products/browserdrop",
-        external: false,
+        label: "Get it on Google Play",
+        desc: "Direct link to the Play Store listing.",
+        href: "https://play.google.com/store/apps/details?id=com.xiaoniubuniu.browserdrop",
+        external: true,
       },
       {
         label: "Product site & docs",

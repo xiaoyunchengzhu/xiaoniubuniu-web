@@ -1,17 +1,17 @@
 ---
 title: "BrowserDrop"
 date: "2026-09-11"
-status: "in-development"
+status: "released"
 category: "mobile"
 icon: "/images/products/browserdrop/icon_256.png"
 platforms: ["Android"]
 tags: ["Android", "file transfer", "LAN", "HTTP", "Java", "no cloud"]
-description: "Your Android files, in any browser. Pick a folder on your phone, open a link on your computer — browse, download, upload over your local Wi-Fi. No cloud, no account, no PC client. Currently in closed beta."
+description: "Your Android files, in any browser. Pick a folder on your phone, open a link on your computer — browse, download, upload over your local Wi-Fi. No cloud, no account, no PC client. Now live on Google Play."
 link: "https://browserdrop.xiaoniubuniu.com"
 image: "/images/products/browserdrop/feature_graphic.png"
-cta_label: "Join the Closed Beta"
-cta_url: "https://play.google.com/apps/testing/com.xiaoniubuniu.browserdrop"
-subline: "Free during beta · Android · No account needed"
+cta_label: "Get it on Google Play"
+cta_url: "https://play.google.com/store/apps/details?id=com.xiaoniubuniu.browserdrop"
+subline: "Android · No account needed · Ad-supported, one-tap ad removal"
 highlights: ["No cloud", "No account", "No PC client"]
 pricing: "free"
 app_category: "UtilitiesApplication"
@@ -55,22 +55,18 @@ Everything happens over plain local HTTP inside your network. **Files never touc
 
 **Works while the phone sleeps.** A foreground service keeps the server alive with a persistent notification and a one-tap Stop — so you can close the lid of your laptop... and your phone's screen, without the transfer dying.
 
-## Status: Closed Beta
+## Now on Google Play
 
-BrowserDrop is currently in **closed testing on Google Play** and is not listed in the store yet. The beta exists to stress-test exactly the things simulators can't: aggressive OEM battery killers (Xiaomi, Samsung, vivo...), flaky networks, and real-world usage patterns before the public release.
+BrowserDrop has left beta and is **live on Google Play** (Android 7.0+) — no opt-in, no test group, just install:
 
-The beta is free and ad-free, and it collects nothing beyond anonymous crash reports.
+**[play.google.com/store/apps/details?id=com.xiaoniubuniu.browserdrop](https://play.google.com/store/apps/details?id=com.xiaoniubuniu.browserdrop)**
 
-**Want in?** Three steps, one Google account, about two minutes (Android 7.0+):
+The public release (1.2.0) carries Google AdMob ads plus a one-time Remove Ads purchase: ads use only your device's resettable advertising ID, your shared files are never involved, and the privacy policy spells all of this out. Beyond the ads, it is the same app the beta testers ran — no account, no cloud, nothing leaving your Wi-Fi.
 
-1. **Join the test group:** [groups.google.com/g/xiaoniubuniu](https://groups.google.com/g/xiaoniubuniu)
-2. **Become a tester:** [play.google.com/apps/testing/com.xiaoniubuniu.browserdrop](https://play.google.com/apps/testing/com.xiaoniubuniu.browserdrop)
-3. **Install the test build:** [play.google.com/store/apps/details?id=com.xiaoniubuniu.browserdrop](https://play.google.com/store/apps/details?id=com.xiaoniubuniu.browserdrop)
-
-Step 3 only works after step 2 — if the Play page says the app isn't available in your country, your opt-in hasn't propagated yet; wait a few minutes and refresh. And please stay opted in for at least two weeks — the beta window Google counts runs on continuous participation.
+Thanks to the testers who stress-ran it against aggressive OEM battery killers and flaky home networks; that beta shook out more real-world bugs than any emulator session ever could.
 
 Product site with full documentation: **[browserdrop.xiaoniubuniu.com](https://browserdrop.xiaoniubuniu.com)**
 
 ## What's Next
 
-After the beta stabilizes: public release on Google Play, then quality-of-life work based on tester feedback — multi-folder sharing and faster bulk downloads are the two most requested items so far. I'll update this page when the doors open.
+Post-release work is driven by user feedback — multi-folder sharing and faster bulk downloads are the two most requested items so far. I'll update this page as they ship.
