@@ -8,6 +8,7 @@
 
 - [ActionSense](https://www.xiaoniubuniu.com/products/action-sense): Free, open-source (MIT) macOS menu-bar app. Detects what you copy (URLs, colors, math, JSON, addresses...) and puts the right action at your cursor. No shortcut, no window. Download: https://www.xiaoniubuniu.com/downloads/ActionSense_2.0.dmg
 - [BrowserDrop](https://www.xiaoniubuniu.com/products/browserdrop): Android app, live on Google Play. Shares a chosen phone folder over local Wi-Fi as a web workspace — browse/preview/download/upload from any browser. No cloud, no account, no PC client. Install: https://play.google.com/store/apps/details?id=com.xiaoniubuniu.browserdrop
+- [WebMedia Scanner](https://www.xiaoniubuniu.com/products/webmedia-scanner): Android app, live on Google Play. Sniffs hidden videos, audio, images and files out of any web page with three detection engines; m3u8/HLS downloader that decrypts AES-128 and remuxes to one playable MP4; resume, batch save, hotlink handling. No cloud, no account; DRM streams intentionally unsupported. Install: https://play.google.com/store/apps/details?id=com.xiaoniubuniu.mediadownloader
 
 ## Blog (Build in Public)
 
@@ -15,6 +16,9 @@
 - [Upgrading to ActionSense 2.0](https://www.xiaoniubuniu.com/blog/upgrade-to-actionsense)
 - [How This Site Was Built](https://www.xiaoniubuniu.com/blog/xiaoniubuniu-site-build)
 - [Build Your Own VPN on a VPS — From $2.5/Month](https://www.xiaoniubuniu.com/blog/vps-vpn)
+- [How to Download an m3u8 (HLS) Video as One Playable MP4](https://www.xiaoniubuniu.com/blog/download-m3u8-hls-video)
+- [How to Find Every Hidden Video, Audio and Image on a Web Page](https://www.xiaoniubuniu.com/blog/find-hidden-videos-website)
+- [Launching WebMedia Scanner: A Media Sniffer That Says No to DRM](https://www.xiaoniubuniu.com/blog/webmedia-scanner-launch)
 
 ## Pages
 
