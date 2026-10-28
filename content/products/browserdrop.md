@@ -70,3 +70,17 @@ Product site with full documentation: **[browserdrop.xiaoniubuniu.com](https://b
 ## What's Next
 
 Post-release work is driven by user feedback — multi-folder sharing and faster bulk downloads are the two most requested items so far. I'll update this page as they ship.
+
+## FAQ
+
+### Is BrowserDrop free?
+Yes. The full app is free on Google Play, supported by ads, with a one-time Remove Ads purchase — no subscription.
+
+### Does it need internet or a server account?
+No. Transfers run entirely over your local Wi-Fi/LAN. Your phone's hotspot counts as a local network too; no account, no sign-in, and no file ever leaves your network.
+
+### Do I need to install anything on my computer?
+Nothing. The computer side is a plain browser page — works on Windows, macOS, Linux, ChromeOS, even another phone's browser. Great for locked-down machines where you can't install software.
+
+### Which folders can a visitor see?
+Exactly one: the folder you picked through Android's Storage Access Framework when starting a share. Everything else on the device is invisible to the web side, and closing the sharing screen ends access immediately.

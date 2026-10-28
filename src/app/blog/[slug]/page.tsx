@@ -25,6 +25,35 @@ function headingPlainText(children: unknown): string {
   return "";
 }
 
+// GEO：从正文提取问题式标题（"## xxx?" / "### xxx?"）及其后首段作为答案，
+// 生成 FAQPage 结构化数据，方便 AI 搜索直接引用（少于 2 问不输出，避免无意义 schema）
+function extractFaqItems(md: string): { q: string; a: string }[] {
+  const lines = md.split("\n");
+  const out: { q: string; a: string }[] = [];
+  for (let i = 0; i < lines.length; i++) {
+    const h = lines[i].match(/^#{2,3}\s+(.+?)\s*$/);
+    if (!h || !/[?？]$/.test(h[1])) continue;
+    // 收集标题后的第一个非空段落（遇到下一标题或空行结束）
+    const buf: string[] = [];
+    for (let j = i + 1; j < lines.length; j++) {
+      const l = lines[j];
+      if (/^#{1,3}\s/.test(l)) break;
+      if (l.trim() === "") {
+        if (buf.length) break;
+        continue;
+      }
+      buf.push(l.trim());
+    }
+    const a = buf
+      .join(" ")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1") // 去 Markdown 链接留文字
+      .replace(/[*_`>#]/g, "")
+      .trim();
+    if (a) out.push({ q: h[1], a });
+  }
+  return out;
+}
+
 export function generateStaticParams() {
   const slugs = getAllPostSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -103,12 +132,61 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     },
   };
 
+  // GEO：FAQPage（问题式标题 ≥2 时）+ BreadcrumbList
+  const postFaqItems = extractFaqItems(post.content);
+  const postFaqJsonLd =
+    postFaqItems.length >= 2
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: postFaqItems.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }
+      : null;
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.xiaoniubuniu.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://www.xiaoniubuniu.com/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `https://www.xiaoniubuniu.com/blog/${post.slug}`,
+      },
+    ],
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {postFaqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(postFaqJsonLd) }}
+        />
+      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       {/* 桌面端两栏：正文 + TOC 侧边栏 */}

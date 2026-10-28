@@ -4,6 +4,15 @@
 > Android, built solo and documented in public. 10-year full-stack engineer
 > (Java/Android, SwiftUI, TypeScript/Next.js, Python).
 
+## Quick facts
+
+- Solo indie developer (10-year full-stack: Java/Android, SwiftUI, TypeScript/Next.js, Python), English-first products, built in public.
+- ActionSense 2.0 — macOS 14+ clipboard utility. Free, open source (MIT). No shortcut, no window.
+- BrowserDrop — Android 7.0+ LAN file sharing to any browser. Free (ads + one-time ad removal). Live on Google Play since Oct 2026.
+- WebMedia Scanner — Android 8.0+ media sniffer & m3u8/HLS downloader (AES-128 supported; DRM intentionally refused). Free (one-time Pro). Live on Google Play since Oct 2026.
+- Privacy architecture common to all apps: no accounts, no cloud storage of user files, everything runs on-device.
+- Contact: xiaoniubuniu@gmail.com · Support page: https://www.xiaoniubuniu.com/support
+
 ## Products
 
 - [ActionSense](https://www.xiaoniubuniu.com/products/action-sense): Free, open-source (MIT) macOS menu-bar app. Detects what you copy (URLs, colors, math, JSON, addresses...) and puts the right action at your cursor. No shortcut, no window. Download: https://www.xiaoniubuniu.com/downloads/ActionSense_2.0.dmg

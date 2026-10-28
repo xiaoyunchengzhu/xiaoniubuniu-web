@@ -5,6 +5,7 @@ import {
   getAllProducts,
 } from "@/lib/products";
 import { statusLabels } from "@/lib/product-constants";
+import { slugifyHeading } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -23,6 +24,13 @@ const licenseUrls: Record<string, string> = {
 function linkTargetProps(href?: string) {
   const isExternal = !!href && /^https?:\/\//.test(href);
   return isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
+
+// 从 react-markdown children 取纯文本（用于标题锚点 id）
+function headingPlainText(children: unknown): string {
+  if (typeof children === "string") return children;
+  if (Array.isArray(children)) return children.map(headingPlainText).join("");
+  return "";
 }
 
 interface ProductDetailPageProps {
@@ -171,6 +179,32 @@ export default function ProductDetailPage({
         }
       : null;
 
+  // GEO：面包屑结构化数据，明确页面在站点层级中的位置
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.xiaoniubuniu.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Products",
+        item: "https://www.xiaoniubuniu.com/products",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.title,
+        item: `https://www.xiaoniubuniu.com/products/${product.slug}`,
+      },
+    ],
+  };
+
   return (
     <div>
       <script
@@ -183,6 +217,10 @@ export default function ProductDetailPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
 
       {/* ===== Hero ===== */}
       <section className="max-w-2xl mx-auto px-4 pt-16 pb-8 text-center">
@@ -342,6 +380,15 @@ export default function ProductDetailPage({
                     {children}
                   </a>
                 );
+              },
+              // GEO：标题带锚点 id，供 AI/搜索引擎按小节深链引用
+              h2({ children }) {
+                const id = slugifyHeading(headingPlainText(children));
+                return <h2 id={id}>{children}</h2>;
+              },
+              h3({ children }) {
+                const id = slugifyHeading(headingPlainText(children));
+                return <h3 id={id}>{children}</h3>;
               },
             }}
           >

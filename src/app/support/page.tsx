@@ -60,8 +60,30 @@ const productSupport = [
 ];
 
 export default function SupportPage() {
+  // GEO：联系页结构化数据，让 AI 搜索能直接回答“这个作者的联系方式/支持渠道是什么”
+  const contactJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Support",
+    description:
+      "Official support channels for XiaoNiuBuNiu apps (ActionSense, BrowserDrop, WebMedia Scanner).",
+    url: "https://www.xiaoniubuniu.com/support",
+    mainEntity: {
+      "@type": "Person",
+      name: "XiaoNiuBuNiu",
+      email: "xiaoniubuniu@gmail.com",
+      sameAs: [
+        "https://github.com/xiaoyunchengzhu",
+        "https://x.com/xiaoyunchengzhu",
+      ],
+    },
+  };
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
+      />
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 text-center">
         Support
       </h1>

@@ -7,6 +7,17 @@ tags: ["m3u8", "HLS", "video downloader", "ffmpeg", "Android"]
 description: "m3u8 files aren't videos — they're shopping lists for them. Here's how to actually download an HLS stream as a single playable MP4, on a PC with ffmpeg or VLC, and on Android without a computer."
 ---
 
+## Quick Answers
+
+### Can I download an m3u8 video as a normal MP4 file?
+Yes, losslessly and in seconds: `ffmpeg -i "playlist.m3u8" -c copy output.mp4` remuxes the segments without re-encoding. On Android, an app like [WebMedia Scanner](/products/webmedia-scanner) does the same job on-device.
+
+### Why doesn't my download manager save an .m3u8 link properly?
+Because an m3u8 isn't a video — it's a text playlist indexing hundreds of separate `.ts` segment files. Something has to fetch every segment and stitch them together; download managers just fetch the one file they were given.
+
+### Can any tool download DRM-protected HLS streams?
+No legitimate one. AES-128 clear-key streams (the key is in the playlist) are fine, but Widevine and SAMPLE-AES stay encrypted — that boundary is the point of DRM, and crossing it is a legal problem, not a feature request.
+
 ## First: An m3u8 Is Not a Video
 
 Paste an `.m3u8` URL into a normal download manager and one of two things happens: you get a tiny text file, or the download fails. That's expected. HLS (HTTP Live Streaming) splits a video into hundreds of small `.ts` segments — usually 4 to 10 seconds each — and the m3u8 "playlist" is just an index that says *fetch these, in this order, at this quality*. A master playlist adds another layer: one file pointing at several quality variants (1080p, 720p, 480p...), each with its own sub-playlist.

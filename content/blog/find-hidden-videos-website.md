@@ -7,6 +7,17 @@ tags: ["media sniffing", "DevTools", "Android", "lazy loading", "video downloade
 description: "View-source is blind: modern pages load their media through JavaScript, not markup. Here's how to actually see every video, audio file and image a page fetches — on desktop and on Android."
 ---
 
+## Quick Answers
+
+### How do I see all the videos on a website?
+Open Chrome DevTools (`F12`) → Network tab → filter by **Media**, then reload and scroll the page. Every video, audio stream and lazy-loaded image the page actually fetches appears, with its real URL.
+
+### Is there a media sniffer for Android?
+Yes — apps that embed a real browser and watch the network layer underneath it. [WebMedia Scanner](/products/webmedia-scanner) does exactly this on-device: open a page, get grouped Video / Audio / Images / Files results with thumbnails, download directly.
+
+### Can sniffing download DRM-protected video?
+No, and that's by design. Sniffing reveals URLs, not keys — Widevine and SAMPLE-AES streams stay ciphertext without a license exchange. What it does find: MP4s, HLS/m3u8, audio streams, lazy images and documents a page loads in the clear.
+
 ## Why "Save Video As…" Doesn't Exist Anymore
 
 Ask someone how to grab a video off a website and they'll say: right-click, inspect, view source. Try that on a modern page and you'll find... a `<div>` and a JavaScript bundle. The video isn't there because it doesn't need to be. Media today arrives through at least four doors that markup never sees:
