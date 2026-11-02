@@ -1,10 +1,10 @@
 ---
-title: "WebMedia Scanner"
+title: "WebMedia: Video Downloader"
 date: "2026-10-28"
 status: "released"
 category: "mobile"
-icon: "/images/products/webmedia-scanner/icon_256.png"
-image: "/images/products/webmedia-scanner/feature_graphic.png"
+icon: "/images/products/webmedia-video-downloader/icon_256.png"
+image: "/images/products/webmedia-video-downloader/feature_graphic.png"
 platforms: ["Android"]
 tags: ["Android", "video downloader", "m3u8", "HLS", "media sniffing", "audio downloader"]
 description: "Android app that sniffs hidden videos, audio, images and files out of any web page — an m3u8/HLS downloader with AES-128 decryption, resume and batch save. No cloud, no account."
@@ -16,22 +16,20 @@ highlights: ["Sniffs every request", "m3u8 → playable MP4", "Resume + batch sa
 pricing: "free"
 app_category: "UtilitiesApplication"
 screenshots:
-  - "/images/products/webmedia-scanner/s01-home.png"
-  - "/images/products/webmedia-scanner/s02-scan.png"
-  - "/images/products/webmedia-scanner/s03-browsing.png"
-  - "/images/products/webmedia-scanner/s04-results.png"
-  - "/images/products/webmedia-scanner/s05-downloads.png"
-  - "/images/products/webmedia-scanner/s06-settings.png"
-  - "/images/products/webmedia-scanner/s07-pro.png"
+  - "/images/products/webmedia-video-downloader/screenshot_6.jpg"
+  - "/images/products/webmedia-video-downloader/screenshot_1.jpg"
+  - "/images/products/webmedia-video-downloader/screenshot_3.jpg"
+  - "/images/products/webmedia-video-downloader/screenshot_4.jpg"
+  - "/images/products/webmedia-video-downloader/screenshot_5.jpg"
 ---
 
-![WebMedia Scanner — find and download hidden media from any web page](/images/products/webmedia-scanner/feature_graphic.png)
+![WebMedia: Video Downloader — find and download hidden media from any web page](/images/products/webmedia-video-downloader/feature_graphic.png)
 
 ## The Download Button Isn't There Anymore
 
 Ten years ago, right-clicking a video gave you "Save video as…". Today the page plays a trailer-length teaser of what's actually a distributed system: video arrives in HLS segments (`*.m3u8` + hundreds of `.ts` chunks), audio hides inside a JavaScript player, images load lazily only when you scroll near them, and half of it refuses requests that don't carry the page's `Referer` header.
 
-Paste that page URL into a classic "copy video address" downloader and it finds nothing — because there is no single address to copy. **WebMedia Scanner** solves this the only way that actually works: it opens the page in a real browser on your phone, watches every single network request the page makes, and shows you the media it was *actually* loading.
+Paste that page URL into a classic "copy video address" downloader and it finds nothing — because there is no single address to copy. **WebMedia: Video Downloader** solves this the only way that actually works: it opens the page in a real browser on your phone, watches every single network request the page makes, and shows you the media it was *actually* loading.
 
 ## Three Detection Engines, One Scan
 
@@ -47,7 +45,7 @@ Results come back grouped into **Video / Audio / Images / Files** with real thum
 
 ## An m3u8 Downloader That Gives You One Playable MP4
 
-Streaming is where most tools stop at "downloaded 800 fragment files and good luck." WebMedia Scanner finishes the job:
+Streaming is where most tools stop at "downloaded 800 fragment files and good luck." WebMedia: Video Downloader finishes the job:
 
 - **HLS / m3u8**: parse the master playlist, pick any bitrate variant (or batch-grab every quality at once on Pro), download all segments, decrypt **AES-128** encrypted streams, merge the `.ts` chunks and remux into a single playable `.mp4`.
 - **Plain files**: MP4, WEBM, MKV, FLV, AVI, MOV · MP3, AAC, M4A, WAV, OGG, OPUS · JPG, PNG, WEBP, GIF, BMP · PDF, ZIP and anything else a page exposes.
@@ -69,9 +67,9 @@ There is no company server to trust or distrust — there is no server. Scanning
 
 The app is free to use with ads. A one-time purchase (no subscription) removes ads forever and unlocks the Pro pack: **Turbo parallel downloads · auto-download rules (files matching your rules are saved automatically after each scan) · every HLS quality variant in one batch · unlimited history and result snapshots**. Buy it once, it's restored with your Google account on any device.
 
-> **Only download what you have the right to save.** Respect the websites you visit and their content owners. WebMedia Scanner is a tool for recovering media *you're entitled to* — your own uploads, openly licensed content, pages that offer no other way.
+> **Only download what you have the right to save.** Respect the websites you visit and their content owners. WebMedia: Video Downloader is a tool for recovering media *you're entitled to* — your own uploads, openly licensed content, pages that offer no other way.
 
-## Get WebMedia Scanner
+## Get WebMedia: Video Downloader
 
 **[Get it on Google Play →](https://play.google.com/store/apps/details?id=com.xiaoniubuniu.mediadownloader)** · Product site with full documentation: **[webmediascanner.xiaoniubuniu.com](https://webmediascanner.xiaoniubuniu.com)**
 
@@ -83,7 +81,7 @@ Built with the same hands-on approach as everything else on this site — pure J
 No. Streams protected by real DRM (Widevine, SAMPLE-AES) are detected but never decrypted — that is off-limits by design. What it does download: unencrypted media any page loads — MP4s, HLS/m3u8 with AES-128 segment keys, audio streams, lazy-loaded images, documents.
 
 ### How is this different from an online "video downloader" website?
-Those services re-implement sniffing server-side for a few supported sites, route your links and files through their servers, and are the first thing to break when a site changes. WebMedia Scanner runs a real browser on your phone, so any page that loads media can be sniffed — and nothing leaves your device.
+Those services re-implement sniffing server-side for a few supported sites, route your links and files through their servers, and are the first thing to break when a site changes. WebMedia: Video Downloader runs a real browser on your phone, so any page that loads media can be sniffed — and nothing leaves your device.
 
 ### The download got interrupted. Do I start over?
 No. Downloads resume from where they stopped via HTTP Range, including after you pause them manually or the app is killed mid-transfer.

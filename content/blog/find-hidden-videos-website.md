@@ -1,7 +1,7 @@
 ---
 title: "How to Find Every Hidden Video, Audio and Image on a Web Page"
 date: "2026-10-26"
-image: "/images/products/webmedia-scanner/s04-results.png"
+image: "/images/products/webmedia-video-downloader/screenshot_3.jpg"
 category: "toolbox"
 tags: ["media sniffing", "DevTools", "Android", "lazy loading", "video downloader"]
 description: "View-source is blind: modern pages load their media through JavaScript, not markup. Here's how to actually see every video, audio file and image a page fetches — on desktop and on Android."
@@ -13,7 +13,7 @@ description: "View-source is blind: modern pages load their media through JavaSc
 Open Chrome DevTools (`F12`) → Network tab → filter by **Media**, then reload and scroll the page. Every video, audio stream and lazy-loaded image the page actually fetches appears, with its real URL.
 
 ### Is there a media sniffer for Android?
-Yes — apps that embed a real browser and watch the network layer underneath it. [WebMedia Scanner](/products/webmedia-scanner) does exactly this on-device: open a page, get grouped Video / Audio / Images / Files results with thumbnails, download directly.
+Yes — apps that embed a real browser and watch the network layer underneath it. [WebMedia: Video Downloader](/products/webmedia-video-downloader) does exactly this on-device: open a page, get grouped Video / Audio / Images / Files results with thumbnails, download directly.
 
 ### Can sniffing download DRM-protected video?
 No, and that's by design. Sniffing reveals URLs, not keys — Widevine and SAMPLE-AES streams stay ciphertext without a license exchange. What it does find: MP4s, HLS/m3u8, audio streams, lazy images and documents a page loads in the clear.
@@ -52,7 +52,7 @@ Your phone's Chrome has no Network tab. The pattern everyone followed for years 
 
 What works: an app that opens the page in a **real browser on your phone** and watches the network underneath it — sniffing the exact same requests you'd see in DevTools, on a device you're already logged into.
 
-That's the core of [WebMedia Scanner](/products/webmedia-scanner), the Android app I shipped. Paste (or just copy) a link, and while its WebView loads the page like any browser, three engines sweep what comes back:
+That's the core of [WebMedia: Video Downloader](/products/webmedia-video-downloader), the Android app I shipped. Paste (or just copy) a link, and while its WebView loads the page like any browser, three engines sweep what comes back:
 
 | Engine | Catches |
 |---|---|
@@ -62,7 +62,7 @@ That's the core of [WebMedia Scanner](/products/webmedia-scanner), the Android a
 
 Results land grouped as **Video / Audio / Images / Files** with thumbnails and sizes, so you can see what's actually on the page before saving anything:
 
-![Scan results grouped by media type](/images/products/webmedia-scanner/s04-results.png)
+![Scan results grouped by media type](/images/products/webmedia-video-downloader/screenshot_3.jpg)
 
 Because sniffing and downloading happen in the same app, the awkward parts are already handled: the page's `Referer` and cookies attach to every request (so hotlink-protected assets download cleanly), and HLS streams get assembled into a single MP4 rather than 600 loose fragments — [here's the full m3u8 walkthrough if that part interests you](/blog/download-m3u8-hls-video).
 

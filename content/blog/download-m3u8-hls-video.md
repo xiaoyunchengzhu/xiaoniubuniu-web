@@ -1,7 +1,7 @@
 ---
 title: "How to Download an m3u8 (HLS) Video as One Playable MP4"
 date: "2026-10-24"
-image: "/images/products/webmedia-scanner/feature_graphic.png"
+image: "/images/products/webmedia-video-downloader/feature_graphic.png"
 category: "toolbox"
 tags: ["m3u8", "HLS", "video downloader", "ffmpeg", "Android"]
 description: "m3u8 files aren't videos — they're shopping lists for them. Here's how to actually download an HLS stream as a single playable MP4, on a PC with ffmpeg or VLC, and on Android without a computer."
@@ -10,7 +10,7 @@ description: "m3u8 files aren't videos — they're shopping lists for them. Here
 ## Quick Answers
 
 ### Can I download an m3u8 video as a normal MP4 file?
-Yes, losslessly and in seconds: `ffmpeg -i "playlist.m3u8" -c copy output.mp4` remuxes the segments without re-encoding. On Android, an app like [WebMedia Scanner](/products/webmedia-scanner) does the same job on-device.
+Yes, losslessly and in seconds: `ffmpeg -i "playlist.m3u8" -c copy output.mp4` remuxes the segments without re-encoding. On Android, an app like [WebMedia: Video Downloader](/products/webmedia-video-downloader) does the same job on-device.
 
 ### Why doesn't my download manager save an .m3u8 link properly?
 Because an m3u8 isn't a video — it's a text playlist indexing hundreds of separate `.ts` segment files. Something has to fetch every segment and stitch them together; download managers just fetch the one file they were given.
@@ -74,7 +74,7 @@ For one-off emergencies they're fine. As a tool you rely on, neither shape is go
 
 This is the case nobody's tutorial covers well, because there's no DevTools in your pocket and no ffmpeg in your path. The pieces — watch the network traffic, find the playlist, download segments, decrypt, remux — all have to happen inside one app.
 
-That's exactly what I built [WebMedia Scanner](/products/webmedia-scanner) for. You open the page inside the app; it watches every network request the page makes, and when an HLS stream appears you get it as one entry in the list. Tapping download takes care of the rest:
+That's exactly what I built [WebMedia: Video Downloader](/products/webmedia-video-downloader) for. You open the page inside the app; it watches every network request the page makes, and when an HLS stream appears you get it as one entry in the list. Tapping download takes care of the rest:
 
 - Pick any bitrate variant from the master playlist (or batch all qualities on Pro).
 - **AES-128 encrypted streams are decrypted automatically** and remuxed into a single playable `.mp4` — no `.ts` confetti.
@@ -85,7 +85,7 @@ It's free on [Google Play](https://play.google.com/store/apps/details?id=com.xia
 
 ## What None of These Methods Can (or Should) Do
 
-Everything above works on **unencrypted** media and **AES-128 clear-key** streams. It stops dead at real DRM — Widevine (most commercial streaming services) and SAMPLE-AES. That's not a missing feature; it's the line. Decrypting DRM is where "handy utility" becomes a legal problem, and every tool that claims otherwise is lying or about to be removed from its store. WebMedia Scanner detects DRM streams, marks them as unsupported, and leaves them alone.
+Everything above works on **unencrypted** media and **AES-128 clear-key** streams. It stops dead at real DRM — Widevine (most commercial streaming services) and SAMPLE-AES. That's not a missing feature; it's the line. Decrypting DRM is where "handy utility" becomes a legal problem, and every tool that claims otherwise is lying or about to be removed from its store. WebMedia: Video Downloader detects DRM streams, marks them as unsupported, and leaves them alone.
 
 ## A Note on Rights
 

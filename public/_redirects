@@ -1,0 +1,4 @@
+# Cloudflare Pages 301：产品更名后旧 URL 保留收录权重（2026-11 由 webmedia-scanner 更名为 webmedia-video-downloader）
+/products/webmedia-scanner /products/webmedia-video-downloader 301
+/blog/webmedia-scanner-launch /blog/webmedia-video-downloader-launch 301
+/images/products/webmedia-scanner/* /images/products/webmedia-video-downloader/:splat 301
