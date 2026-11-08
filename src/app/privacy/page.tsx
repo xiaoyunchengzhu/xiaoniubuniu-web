@@ -22,8 +22,12 @@ export default function PrivacyPage() {
         <p className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-sm">
           <strong className="text-gray-900">The short version:</strong> my apps
           are built to work locally and process no personal data on any server.
-          This website runs no ads, no analytics, and sets no cookies. If that
-          ever changes, this page gets updated before it takes effect.
+          This website runs no ads. It measures aggregate traffic with Google
+          Analytics (loaded through Google Tag Manager, and only after you
+          accept the cookie banner); beyond that Google signal, the site itself
+          sets no cookies and stores nothing about you except your consent
+          choice.
+          If that ever changes, this page gets updated before it takes effect.
         </p>
 
         <section>
@@ -176,14 +180,41 @@ export default function PrivacyPage() {
           </h2>
           <ul className="list-disc pl-6 space-y-1">
             <li>
-              The site is statically hosted and sets no first-party cookies or
-              local storage of your activity. Because nothing requires storage
-              consent, the site deliberately shows{" "}
-              <strong className="text-gray-900">no cookie banner</strong>.
+              The site is statically hosted and sets{" "}
+              <strong className="text-gray-900">
+                no first-party cookies
+              </strong>{" "}
+              of your activity. The only thing stored on your device by me is
+              one localStorage entry holding your cookie-consent choice; beyond
+              that, only Google&apos;s taggers set their own, covered below.
             </li>
             <li>
-              No advertising or behavioral analytics scripts are loaded, from me
-              or any third party.
+              <strong className="text-gray-900">Analytics:</strong> the site
+              loads Google Tag Manager and Google Analytics 4 to understand
+              aggregate traffic — page views, referrers, rough country/device
+              breakdown. I read reports, not identities; no advertising
+              personalization or remarketing is enabled from my side, and no
+              behavioral profile is built across other sites. Signals Google
+              derives are stored under{" "}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google&apos;s privacy policy
+              </a>
+              , including its opt-out browser add-on. The tag boots in{" "}
+              <strong className="text-gray-900">
+                Google Consent Mode with analytics denied by default
+              </strong>{" "}
+              — a one-time banner asks for your choice, and analytics becomes
+              active only after you accept. Choosing &quot;No thanks&quot; (or
+              never answering) keeps it off; your decision is remembered per
+              device and takes effect on the next visit immediately.
+            </li>
+            <li>
+              No advertising scripts are loaded — the analytics tag above is
+              the only third-party script on this site.
             </li>
             <li>
               Some outbound links to third-party services are affiliate links.

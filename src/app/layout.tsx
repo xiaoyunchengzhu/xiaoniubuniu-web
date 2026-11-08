@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.xiaoniubuniu.com"),
@@ -47,6 +48,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google Tag Manager 容器（GTM-5XKJJ43V）：根布局一次注入，覆盖全站每个页面。
+            标签（GA4 等）在 GTM 控制台配置；内容为固定字面量，无外部输入 */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-5XKJJ43V"
+        ></script>
+        {/* Consent Mode：在 gtm.js（async）执行前先把同意状态置入 dataLayer。
+            默认 denied；仅当本机 localStorage 里已点过 Accept 才置 granted。
+            键名与 CookieConsent.tsx 的 CONSENT_KEY 保持一致（此处是内联字符串，无法 import） */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}var ac='denied';try{if(localStorage.getItem('xiaoniubuniu-analytics-consent')==='granted')ac='granted';}catch(e){}gtag('consent','default',{ad_storage:'denied',analytics_storage:ac});gtag('js', new Date());",
+          }}
+        />
         {/* JSON-LD: WebSite */}
         <script
           type="application/ld+json"
@@ -76,6 +92,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
